@@ -1,25 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "createtoolboxtooltip",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Create Toolbox Tooltip",
+  "description": "What's in my toolbox?",
   "authors": [
-    "Me!"
+    "Sylvie Lee"
   ],
   "contact": {
-    "sources": "https://github.com/Fabricators-of-Create/create-fabric-addon-template"
+    "sources": "https://github.com/yisylvie/create-toolbox-tooltip"
   },
   "license": "CC0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/createtoolboxtooltip/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.example.modid.ExampleMod"
+      "com.yisylvie.createtoolboxtooltip.createToolboxTooltip"
+    ],
+    "shulkerboxtooltip": [
+       "com.yisylvie.createtoolboxtooltip.toolboxShulkerBoxTooltipPlugin"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "createtoolboxtooltip.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",

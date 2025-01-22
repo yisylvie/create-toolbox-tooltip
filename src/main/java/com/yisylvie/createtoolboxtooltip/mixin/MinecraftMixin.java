@@ -1,6 +1,6 @@
-package com.example.modid.mixin;
+package com.yisylvie.createtoolboxtooltip.mixin;
 
-import com.example.modid.ExampleMod;
+import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
 
 import net.minecraft.client.Minecraft;
 
