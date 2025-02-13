@@ -18,7 +18,7 @@
       "com.yisylvie.createtoolboxtooltip.createToolboxTooltip"
     ],
     "shulkerboxtooltip": [
-       "com.yisylvie.createtoolboxtooltip.toolboxShulkerBoxTooltipPlugin"
+      "com.yisylvie.createtoolboxtooltip.createToolboxTooltipPlugin"
     ]
   },
   "mixins": [
@@ -28,6 +28,7 @@
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": ">=${fabric_api_version}",
     "create": "${create_version}",
+    "shulkerboxtooltip": "${shulkerboxtooltip_version}",
     "minecraft": "${minecraft_version}"
   }
 }

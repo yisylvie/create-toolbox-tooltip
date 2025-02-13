@@ -1,7 +1,8 @@
 package com.yisylvie.createtoolboxtooltip;
 
+// import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
+// import com.yisylvie.createtoolboxtooltip.toolboxShulkerBoxTooltipPlugin;
 import com.simibubi.create.Create;
-
 import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import net.fabricmc.api.ModInitializer;
 
@@ -22,6 +23,7 @@ public class createToolboxTooltip implements ModInitializer {
 				() -> () -> "{} is accessing Porting Lib from the client!",
 				() -> () -> "{} is accessing Porting Lib from the server!"
 		), NAME);
+		// toolboxShulkerBoxTooltipPlugin.register();
 	}
 
 	public static ResourceLocation id(String path) {

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
 	@Inject(method = "<init>", at = @At("TAIL"))
-	private void example$init(GameConfig gameConfig, CallbackInfo ci) {
-		ExampleMod.LOGGER.info("Hello from {}", ExampleMod.NAME);
+	private void yisylvie$init(GameConfig gameConfig, CallbackInfo ci) {
+		createToolboxTooltip.LOGGER.info("Hello from {}", createToolboxTooltip.NAME);
 	}
 }
