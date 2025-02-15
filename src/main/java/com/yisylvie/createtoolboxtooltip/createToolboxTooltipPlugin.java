@@ -34,6 +34,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.core.NonNullList;
@@ -102,10 +103,14 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
 
             // ShulkerBoxPreviewProvider hand_PreviewProviderShulker = new ShulkerBoxPreviewProvider();
 
+            ItemStack emptyTest = new ItemStack(Items.ACACIA_BOAT);
+            emptyTest.setCount(-1);
+
             // List<ItemStack> inventoryShulker = hand_PreviewProviderShulker.getInventory(preview);
             createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! shoulddisplay:" + hand_PreviewProvider.shouldDisplay(preview), createToolboxTooltip.NAME, Create.VERSION);
-            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! preview.stack:" + preview.stack(), createToolboxTooltip.NAME, Create.VERSION);
-            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! preview.stack.gettagel:" + preview.stack().getTagElement("Inventory"), createToolboxTooltip.NAME, Create.VERSION);
+            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! empty item:" + new ItemStack(Items.ACACIA_BOAT,-1), createToolboxTooltip.NAME, Create.VERSION);
+            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! empty item:" + emptyTest, createToolboxTooltip.NAME, Create.VERSION);
+            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! preview.stack.getTagEl:" + preview.stack().getTagElement("Inventory"), createToolboxTooltip.NAME, Create.VERSION);
             // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! addtooltip:" + hand_PreviewProvider.addTooltip(preview), createToolboxTooltip.NAME, Create.VERSION);
 
             // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! InventoryShulker:" + inventoryShulker, createToolboxTooltip.NAME, Create.VERSION);
