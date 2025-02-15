@@ -1,79 +1,127 @@
 package com.yisylvie.createtoolboxtooltip.api;
 
-import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
 import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
-import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
-import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorKey;
 import com.misterpemodder.shulkerboxtooltip.api.provider.BlockEntityPreviewProvider;
-import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration.LootTableInfoType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
+import com.simibubi.create.content.equipment.toolbox.ToolboxInventory;
+
+import java.util.Iterator;
 import java.util.List;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ShulkerBoxBlock;
 
-public class toolboxPreviewProvider extends BlockEntityPreviewProvider {
-   public toolboxPreviewProvider() {
-      super(8, true);
+// Create uses the "Inventory" tag instead of the "BlockEntity" tag to store data about toolbox contents,
+// so we must replace every instance of the "BlockEntity" tag with the "Inventory" tag.
+public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
+   public ToolboxPreviewProvider() {
+      super(8, false);
    }
 
-   public boolean showTooltipHints(PreviewContext context) {
-      return true;
+   public boolean shouldDisplay(@Nonnull PreviewContext context) {
+      CompoundTag InventoryTag = context.stack().getTagElement("Inventory");
+      if (InventoryTag != null) {
+         return getItemCount(this.getInventory(context)) > 0;
+      } else {
+         return false;
+      }
    }
 
-   public List<ItemStack> getInventory(PreviewContext context) {
+   // If the toolbox is stackable, the Inventory tag doesn't exist (and thus we will not show tooltips)
+   // It seems as though a toolbox loses its stackability when placed in the world
+   public boolean showTooltipHints(@Nonnull PreviewContext context) {
+      return context.stack().getTagElement("Inventory") != null;
+   }
+
+   // copied almost exactly from ShulkerBoxPreviewProvider
+   @Environment(EnvType.CLIENT)
+   public ColorKey getWindowColorKey(@Nonnull PreviewContext context) {
+      DyeColor dye = ((ToolboxBlock) Block.byItem(context.stack().getItem())).getColor();
+      if (dye == null)
+         return ColorKey.BROWN_SHULKER_BOX;
+      return switch (dye) {
+         case ORANGE -> ColorKey.ORANGE_SHULKER_BOX;
+         case MAGENTA -> ColorKey.MAGENTA_SHULKER_BOX;
+         case LIGHT_BLUE -> ColorKey.LIGHT_BLUE_SHULKER_BOX;
+         case YELLOW -> ColorKey.YELLOW_SHULKER_BOX;
+         case LIME -> ColorKey.LIME_SHULKER_BOX;
+         case PINK -> ColorKey.PINK_SHULKER_BOX;
+         case GRAY -> ColorKey.GRAY_SHULKER_BOX;
+         case LIGHT_GRAY -> ColorKey.LIGHT_GRAY_SHULKER_BOX;
+         case CYAN -> ColorKey.CYAN_SHULKER_BOX;
+         case PURPLE -> ColorKey.PURPLE_SHULKER_BOX;
+         case BLUE -> ColorKey.BLUE_SHULKER_BOX;
+         case BROWN -> ColorKey.BROWN_SHULKER_BOX;
+         case GREEN -> ColorKey.GREEN_SHULKER_BOX;
+         case RED -> ColorKey.RED_SHULKER_BOX;
+         case BLACK -> ColorKey.BLACK_SHULKER_BOX;
+         default -> ColorKey.WHITE_SHULKER_BOX;
+      };
+   }
+
+   public List<ItemStack> getInventory(@Nonnull PreviewContext context) {
       int invMaxSize = this.getInventoryMaxSize(context);
       List<ItemStack> inv = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
       CompoundTag InventoryTag = context.stack().getTagElement("Inventory");
-      if (InventoryTag != null && InventoryTag.contains("Items", InventoryTag.getTagType("Items"))) {
-         ListTag itemList = InventoryTag.getList("Items", InventoryTag.getTagType("Items"));
+
+      if (InventoryTag != null && InventoryTag.contains("Items", 9)) {
+         // I have no idea why the getList() method is not working, but this seems to be
+         ListTag itemList = (ListTag)InventoryTag.get("Items");
+
          if (itemList != null) {
-            for(int i = 0; i < itemList.size(); ++i) {
-               CompoundTag itemTag = itemList.getCompound(i);
-               ItemStack s = ItemStack.of(itemTag);
-               if (itemTag.contains("Slot", 99)) {
-                  int slot = itemTag.getInt("Slot");
-                  if (slot >= 0 && slot < invMaxSize) {
-                     inv.set(slot, s);
+            for (int compartment = 0; compartment < this.getInventoryMaxSize(context); compartment++) {
+               int baseIndex = compartment * ToolboxInventory.STACKS_PER_COMPARTMENT;
+               ItemStack s = ItemStack.EMPTY;
+               int count = 0;
+               for(int i = 0; i < itemList.size(); ++i) {
+                  CompoundTag itemTag = itemList.getCompound(i);
+                  if (itemTag.contains("Slot", 99)) {
+                     if (itemTag.getInt("Slot") == baseIndex) {
+                        s = ItemStack.of(itemTag);
+                        count = s.getCount();
+                     } else if(itemTag.getInt("Slot") > baseIndex && itemTag.getInt("Slot") < baseIndex + 4) {
+                        count += ItemStack.of(itemTag).getCount();
+                     }
                   }
+               }
+
+               if (!s.isEmpty()) {
+                  s.setCount(count);
+                  inv.set(compartment, s);
                }
             }
          }
       }
-
       return inv;
    }
 
-   // public List<Component> addTooltip(PreviewContext context) {
-   //    // ItemStack stack = context.stack();
-   //    // CompoundTag compound = stack.getTag();
-   //    Style style = Style.EMPTY.withColor(ChatFormatting.GRAY);
-   //    // if (this.canUseLootTables && compound != null && compound.contains("Inventory", compound.getTagType("Inventory"))) {
-   //    //    CompoundTag InventoryTag = compound.getCompound("Inventory");
-   //    //    if (InventoryTag != null) {
-   //    //       return switch (ShulkerBoxTooltip.config.tooltip.lootTableInfoType) {
-   //    //          case HIDE -> Collections.emptyList();
-   //    //          case SIMPLE -> Collections.singletonList(Component.translatable("shulkerboxtooltip.hint.lootTable").setStyle(style));
-   //    //          default -> Arrays.asList(Component.translatable("shulkerboxtooltip.hint.lootTable.advanced").append(Component.literal(": ")), Component.literal(" " + InventoryTag.getString("LootTable")).setStyle(style));
-   //    //       };
-   //    //    }
-   //    // }
+   private static int getItemCount(@Nullable List<ItemStack> items) {
+      int itemCount = 0;
+      if (items != null) {
+         Iterator<ItemStack> itemIter = items.iterator();
 
-   //    return ShulkerBoxTooltipApi.getCurrentPreviewType(this.isFullPreviewAvailable(context)) == PreviewType.FULL ? Collections.emptyList() : getItemListTooltip(new ArrayList<>(), this.getInventory(context), style);
-   // }
+         while(itemIter.hasNext()) {
+            ItemStack stack = (ItemStack)itemIter.next();
+            if (stack.getItem() != Items.AIR) {
+               ++itemCount;
+            }
+         }
+      }
+
+      return itemCount;
+   }
 }
 
 // <item:create:brown_toolbox>.withTag({

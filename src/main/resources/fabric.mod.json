@@ -30,5 +30,8 @@
     "create": "${create_version}",
     "shulkerboxtooltip": "${shulkerboxtooltip_version}",
     "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu": "*"
   }
 }
