@@ -6,7 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "MinecraftMixin"
+    "BasePreviewRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

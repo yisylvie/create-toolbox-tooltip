@@ -1,45 +1,50 @@
 package com.yisylvie.createtoolboxtooltip;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.ArrayList;
+// import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
+// import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 
-// import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltipClient;
+import org.objectweb.asm.Type;
+
+import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
+// import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
 import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
 import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorKey;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorRegistry;
-import com.misterpemodder.shulkerboxtooltip.api.provider.BlockEntityPreviewProvider;
+// import com.misterpemodder.shulkerboxtooltip.api.provider.BlockEntityPreviewProvider;
 import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProviderRegistry;
-import com.misterpemodder.shulkerboxtooltip.impl.provider.ShulkerBoxPreviewProvider;
-import com.misterpemodder.shulkerboxtooltip.impl.util.ShulkerBoxTooltipUtil;
+import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
+
+// import com.misterpemodder.shulkerboxtooltip.impl.provider.ShulkerBoxPreviewProvider;
+// import com.misterpemodder.shulkerboxtooltip.impl.util.ShulkerBoxTooltipUtil;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
-import com.simibubi.create.foundation.block.DyedBlockList;
+// import com.simibubi.create.foundation.block.DyedBlockList;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 
 import com.simibubi.create.AllBlocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+// import net.minecraft.nbt.CompoundTag;
+// import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ShulkerBoxBlock;
-import net.minecraft.core.NonNullList;
+// import net.minecraft.world.item.Items;
+// import net.minecraft.world.level.block.Block;
+// import net.minecraft.world.level.block.ShulkerBoxBlock;
+// import net.minecraft.core.NonNullList;
 
 // import net.minecraft.world.item.Items;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 
 public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
     // BlockEntry<ToolboxBlock> baseShulker = AllBlocks.TOOLBOXES.get(DyeColor.BROWN);
@@ -100,16 +105,10 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
             ToolboxPreviewProvider hand_PreviewProvider = new ToolboxPreviewProvider();
 
             List<ItemStack> inventory = hand_PreviewProvider.getInventory(preview);
-
-            // ShulkerBoxPreviewProvider hand_PreviewProviderShulker = new ShulkerBoxPreviewProvider();
-
-            ItemStack emptyTest = new ItemStack(Items.ACACIA_BOAT);
-            emptyTest.setCount(-1);
+            List<ItemStack> compartments = hand_PreviewProvider.getCompartments(preview);
 
             // List<ItemStack> inventoryShulker = hand_PreviewProviderShulker.getInventory(preview);
             createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! shoulddisplay:" + hand_PreviewProvider.shouldDisplay(preview), createToolboxTooltip.NAME, Create.VERSION);
-            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! empty item:" + new ItemStack(Items.ACACIA_BOAT,-1), createToolboxTooltip.NAME, Create.VERSION);
-            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! empty item:" + emptyTest, createToolboxTooltip.NAME, Create.VERSION);
             createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! preview.stack.getTagEl:" + preview.stack().getTagElement("Inventory"), createToolboxTooltip.NAME, Create.VERSION);
             // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! addtooltip:" + hand_PreviewProvider.addTooltip(preview), createToolboxTooltip.NAME, Create.VERSION);
 
@@ -121,6 +120,12 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
             createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! Inventory:" + inventory, createToolboxTooltip.NAME, Create.VERSION);
             for (ItemStack stack : inventory) {
                 createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! item:" + stack.getItem() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
+                // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! max stack size:" + stack.getMaxStackSize() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
+            }
+
+            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! comp:" + compartments, createToolboxTooltip.NAME, Create.VERSION);
+            for (ItemStack stack : compartments) {
+                createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! compp item:" + stack.getItem() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
                 // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! max stack size:" + stack.getMaxStackSize() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
             }
 

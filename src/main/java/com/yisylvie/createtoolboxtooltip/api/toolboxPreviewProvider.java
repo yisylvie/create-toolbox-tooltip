@@ -82,7 +82,7 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
          ListTag itemList = (ListTag)InventoryTag.get("Items");
 
          if (itemList != null) {
-            for (int compartment = 0; compartment < this.getInventoryMaxSize(context); compartment++) {
+            for (int compartment = 0; compartment < invMaxSize; compartment++) {
                int baseIndex = compartment * ToolboxInventory.STACKS_PER_COMPARTMENT;
                ItemStack s = ItemStack.EMPTY;
                int count = 0;
@@ -106,6 +106,26 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
          }
       }
       return inv;
+   }
+
+   public List<ItemStack> getCompartments(PreviewContext context) {
+      int invMaxSize = this.getInventoryMaxSize(context);
+      List<ItemStack> comp = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
+      CompoundTag InventoryTag = context.stack().getTagElement("Inventory");
+
+      if (InventoryTag != null && InventoryTag.contains("Compartments", 9)) {
+         // ListTag compartmentsList = (ListTag)InventoryTag.get("Compartments");
+         ListTag compartmentsList = InventoryTag.getList("Compartments", 10);
+
+         if (compartmentsList != null) {
+            for(int i = 0; i < compartmentsList.size(); ++i) {
+               CompoundTag compartmentsTag = compartmentsList.getCompound(i);
+               ItemStack s = ItemStack.of(compartmentsTag);
+               comp.set(i, s);
+            }
+         }
+      }
+      return comp;
    }
 
    private static int getItemCount(@Nullable List<ItemStack> items) {
