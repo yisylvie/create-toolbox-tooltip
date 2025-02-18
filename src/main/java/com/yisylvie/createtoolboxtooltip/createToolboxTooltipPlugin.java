@@ -7,7 +7,7 @@ import java.util.List;
 // import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 
-import org.objectweb.asm.Type;
+// import org.objectweb.asm.Type;
 
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 // import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
@@ -17,7 +17,7 @@ import com.misterpemodder.shulkerboxtooltip.api.color.ColorKey;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorRegistry;
 // import com.misterpemodder.shulkerboxtooltip.api.provider.BlockEntityPreviewProvider;
 import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProviderRegistry;
-import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
+// import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
 
 // import com.misterpemodder.shulkerboxtooltip.impl.provider.ShulkerBoxPreviewProvider;
 // import com.misterpemodder.shulkerboxtooltip.impl.util.ShulkerBoxTooltipUtil;
@@ -44,7 +44,7 @@ import net.minecraft.world.item.ItemStack;
 // import net.minecraft.core.NonNullList;
 
 // import net.minecraft.world.item.Items;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+// import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 
 public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
     // BlockEntry<ToolboxBlock> baseShulker = AllBlocks.TOOLBOXES.get(DyeColor.BROWN);
