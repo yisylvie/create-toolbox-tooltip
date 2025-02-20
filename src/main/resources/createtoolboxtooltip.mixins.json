@@ -6,7 +6,11 @@
   "mixins": [
   ],
   "client": [
-    "BasePreviewRendererMixin"
+    "BasePreviewRendererMixin",
+    "ModPreviewRendererMixin",
+    "ShulkerBoxTooltipClientMixin",
+    "PreviewTooltipComponentMixin",
+    "VanillaPreviewRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
