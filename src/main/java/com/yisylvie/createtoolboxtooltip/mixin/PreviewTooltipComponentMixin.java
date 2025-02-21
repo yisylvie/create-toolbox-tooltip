@@ -40,8 +40,6 @@ import net.minecraft.world.item.ItemStack;
 
 @Mixin(PreviewTooltipComponent.class)
 public abstract class PreviewTooltipComponentMixin {
-    @Shadow(remap = false)
-    private PreviewRenderer renderer;
 
     @Shadow(remap = false)
     private PreviewProvider provider;
@@ -53,7 +51,7 @@ public abstract class PreviewTooltipComponentMixin {
     // when the preview type is compact and the inventory is empty 
     // but the compartments are not. Doing so causes there to be 
     // a silly little gap where the inventory would have been displayed.
-    // In this instance, we must override getHeight() to close that gap
+    // In this instance, we must override getHeight() to close that gap.
     @Inject(
         method = "getHeight", 
         at = @At(
@@ -62,12 +60,12 @@ public abstract class PreviewTooltipComponentMixin {
         cancellable = true
     ) 
     private void createtoolboxtooltip$changeHeight(CallbackInfoReturnable<Integer> cir) {
-        if (provider instanceof ToolboxPreviewProvider) {
-            ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider)provider;
+        if (this.provider instanceof ToolboxPreviewProvider) {
+            ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider)this.provider;
             if (ShulkerBoxTooltip.config.preview.position == PreviewPosition.INSIDE 
-                    && ShulkerBoxTooltipApi.getCurrentPreviewType(provider.isFullPreviewAvailable(context)) == PreviewType.COMPACT
-                    && ToolboxPreviewProvider.getItemCount(toolboxProvider.getInventory(context)) == 0 
-                    && ToolboxPreviewProvider.getItemCount(toolboxProvider.getCompartments(context)) != 0) {
+                    && ShulkerBoxTooltipApi.getCurrentPreviewType(this.provider.isFullPreviewAvailable(this.context)) 
+                    == PreviewType.COMPACT
+                    && toolboxProvider.isInventoryEmpty(this.context)) {
                 cir.setReturnValue(0);
             }
         }

@@ -161,6 +161,10 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 
       return itemCount;
    }
+
+   public Boolean isInventoryEmpty(PreviewContext context) {
+      return getItemCount(this.getInventory(context)) == 0 && getItemCount(this.getCompartments(context)) != 0;
+   } 
 }
 
 // <item:create:brown_toolbox>.withTag({

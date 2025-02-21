@@ -95,10 +95,6 @@ public abstract class BasePreviewRendererMixin {
 	)
 	private Iterator<MergedItemStack> createtoolboxtooltip$changeDrawItemsIterator(
 			Iterator<MergedItemStack> itemsIterator) {
-		// createToolboxTooltip.LOGGER.info(
-		// 		"[{}] toolboxing deez nutz! 69:" + whyyyyy(),
-		// 		createToolboxTooltip.NAME, Create.VERSION);
-
 		if(this.provider instanceof ToolboxPreviewProvider && !itemsIterator.hasNext()) {
 			return createtoolboxtooltip$getCompartmentIterator(provider, previewContext, config);
 		} 
