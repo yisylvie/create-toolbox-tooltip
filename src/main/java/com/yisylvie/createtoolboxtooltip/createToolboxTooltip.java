@@ -1,7 +1,5 @@
 package com.yisylvie.createtoolboxtooltip;
 
-// import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
-// import com.yisylvie.createtoolboxtooltip.createToolboxTooltipPlugin;
 import com.simibubi.create.Create;
 import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import net.fabricmc.api.ModInitializer;
@@ -18,13 +16,6 @@ public class createToolboxTooltip implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Create addon mod [{}] is loading alongside Create [{}]!", NAME, Create.VERSION);
-		LOGGER.info(EnvExecutor.unsafeRunForDist(
-				() -> () -> "{} is accessing Porting Lib from the client!",
-				() -> () -> "{} is accessing Porting Lib from the server!"
-		), NAME);
-		// toolboxShulkerBoxTooltipPlugin.register();
-		createToolboxTooltipPlugin.testing(); 
 	}
 
 	public static ResourceLocation id(String path) {

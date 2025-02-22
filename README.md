@@ -1,32 +1,33 @@
-# Create Fabric Addon Template
+<a href="https://fabricmc.net/">
+    <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_64h.png"
+    alt="Available on Fabric"
+    width="200">
+</a>
 
-This template mod comes pre-configured for developing an addon mod for Create on Fabric.
+# Create Toolbox Tooltip
 
+This addon shows a tooltip which displays the contents of Create toolboxes when hovering over them in your inventory.
 
-## Setup
+You can find the configurations for this mod under the Shulker Box Tooltip mod's config in Mod Menu. Check out their Wiki and [![Modrinth](https://modrinth.com/mod/shulkerboxtooltip)] page for more info. 
 
-This template is an extension of the base [Fabric Example Mod](https://github.com/FabricMC/fabric-example-mod).
-Setup is mostly the same.
+Big thanks to the creators of Shulker Box Tooltip for making this mod a possibility!
 
-Additionally, set `recipe_viewer` in [gradle.properties](gradle.properties). Remember to remove unused
-example code. Make sure versions are up-to-date.
+<img src="https://i.imgur.com/4JAmlAz.png" alt="Preview Window" width="500" />
 
-When you publish your mod, you should use jars provided by GitHub Actions. These jars will be built in a predictable
-environment and will have build number metadata.
+## Features:
+- (Basically) everything that Shulker Box Tooltip gives you for Shulker Boxes except for toolboxes including GUI color customization
+- Displays empty item stacks 
 
-## Features
-- Access to Create and all of its dependencies
-- Mojang Mappings base, with Parchment providing Javadoc and parameters
-- Automatic build workflow with GitHub Actions
-- Developer QOL: Mod Menu, recipe viewers
+## Coming Soon:
+- Support for Neoforge 
+- Support for other versions of Create and Minecraft
+- Ability to toggle on/off Create's default tooltip for toolboxes
 
-## Other Templates
-- [Multi-loader template](https://github.com/Fabricators-of-Create/create-multiloader-addon-template)
-- [Forge-only template](https://github.com/kotakotik22/CreateAddonTemplate)
-
-## Help
-Questions? Join us in the #devchat channel of the [Create Discord](https://discord.com/invite/hmaD7Se).
+## Depends:
+- Minecraft version 1.20.1
+- Create version 0.5.1-f-build.1417 (and all its dependencies)
+- Shulker Box Tooltip version 4.0.4 (and all its dependencies)
 
 ## License
 
-This template is available under the CC0 license. Feel free to do as you wish with it.
+Copyright &copy; 2025, Sylvie Lee. Licensed under the [MIT License](LICENSE).

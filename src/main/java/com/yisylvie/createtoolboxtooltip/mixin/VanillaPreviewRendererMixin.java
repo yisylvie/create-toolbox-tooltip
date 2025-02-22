@@ -20,8 +20,10 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
         super(slotWidth, slotHeight, slotXOffset, slotYOffset);
     }
 
-    // Vanilla theme displays even if inventory is empty, so we must override for
-    // when there are nonempty compartments and the preview type is compact
+    /** 
+     * Vanilla theme displays even if inventory is empty, so we must override for
+     * when there are nonempty compartments and the preview type is compact 
+     */
     @Inject(
         method = "draw", 
         at = @At(value = "HEAD"),

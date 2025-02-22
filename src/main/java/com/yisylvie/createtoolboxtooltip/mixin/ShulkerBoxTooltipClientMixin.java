@@ -1,52 +1,40 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
-import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.commons.lang3.mutable.Mutable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.struct.MemberInfo;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+
 import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
 import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltipClient;
 import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
 import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
 import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
-import com.misterpemodder.shulkerboxtooltip.api.config.PreviewConfiguration;
 import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
-import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
-import com.misterpemodder.shulkerboxtooltip.impl.renderer.VanillaPreviewRenderer;
-import com.misterpemodder.shulkerboxtooltip.impl.util.MergedItemStack;
-import com.simibubi.create.Create;
 
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
-// If an inventory is empty, but not the compartments,
-// we do not display anything in compact mode, but we do display
-// in full mode. Here, we change the keybind tooltips accordingly.
+/**
+ * If an inventory is empty, but not the compartments,
+ * we do not display anything in compact mode, but we do display
+ * in full mode. Here, we change the keybind tooltips accordingly.
+ */
 @Mixin(ShulkerBoxTooltipClient.class)
 public abstract class ShulkerBoxTooltipClientMixin {
 
+    /**
+     * Changes the previewKeyHint.append(previewKeyText) operation
+     * 
+     * @return the new preview key hint displayed when isInventoryEmpty()
+     */
     @WrapOperation(
         method = "getPreviewKeyTooltipHint", 
         at = @At(
@@ -81,8 +69,10 @@ public abstract class ShulkerBoxTooltipClientMixin {
         return previewKeyHintOperation.call(previewKeyHint, previewKeyText);
     }
 
-    // Since there is no compact mode when isInventoryEmpty, 
-    // we never want to display a tooltip when the preview type is full
+    /**
+     * Since there is no compact mode when isInventoryEmpty, we never 
+     * want to display a keybind tooltip when the preview type is full
+     */
     @Inject(
         method = "getPreviewKeyTooltipHint", 
         at = @At(
@@ -103,7 +93,9 @@ public abstract class ShulkerBoxTooltipClientMixin {
         }
     }
 
-    // Set to only ever see "view full contents" when isInventoryEmpty()
+    /**
+     * Set to only ever see "view full contents" when isInventoryEmpty()
+     */ 
     @ModifyArg(
         method = "getPreviewKeyTooltipHint", 
         at = @At(
@@ -118,9 +110,6 @@ public abstract class ShulkerBoxTooltipClientMixin {
         if (provider instanceof ToolboxPreviewProvider) {
             ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider) provider;
             if (toolboxProvider.isInventoryEmpty(context)) {
-                createToolboxTooltip.LOGGER.info(
-                        "[{}] toolboxing deez nutz! hint:" + contentHint,
-                        createToolboxTooltip.NAME, Create.VERSION);
                 return provider.getFullTooltipHintLangKey(context);
             }
         }

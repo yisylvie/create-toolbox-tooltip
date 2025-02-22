@@ -1,35 +1,28 @@
 package com.yisylvie.createtoolboxtooltip;
 
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
+
 import java.util.Iterator;
-import java.util.List;
 import javax.annotation.Nonnull;
 
-import com.jozufozu.flywheel.util.Color;
-import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
 import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorKey;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorRegistry;
 import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProviderRegistry;
 
-import com.simibubi.create.Create;
-import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
-
 import com.tterrag.registrate.util.entry.BlockEntry;
 
+import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
 import com.simibubi.create.AllBlocks;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
 public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
-    public static final Item[] TOOLBOX_ITEMS;
+    private static final Item[] TOOLBOX_ITEMS;
     private static final ResourceLocation toolboxResourceLocation = new ResourceLocation("create", "toolboxes");
     
     @Override
@@ -37,8 +30,10 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
         registry.register(toolboxResourceLocation, new ToolboxPreviewProvider(), TOOLBOX_ITEMS);
     }
 
-    // Gives our toolboxes their own options for colors in the mod menu config
-    // Have to use a copy of the shulkers' color keys otherwise they get linked to the shulker colors
+    /**
+     * Gives our toolboxes their own options for colors in the Mod Menu config
+     * Has to use a copy of the shulkers' color keys otherwise they get linked to the shulker colors
+     */
     @Override
     @Environment(EnvType.CLIENT)
     public void registerColors(@Nonnull ColorRegistry registry) {
@@ -64,50 +59,10 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
     private static String blockName(String block) {
         return "block.create." + block;
     }
-
-    public static void testing() {
-        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-            ItemStack handItemStack = player.getMainHandItem();
-            PreviewContext preview = PreviewContext.of(handItemStack);
-            ToolboxPreviewProvider hand_PreviewProvider = new ToolboxPreviewProvider();
-
-            List<ItemStack> inventory = hand_PreviewProvider.getInventory(preview);
-            List<ItemStack> compartments = hand_PreviewProvider.getCompartments(preview);
-
-            // List<ItemStack> inventoryShulker = hand_PreviewProviderShulker.getInventory(preview);
-            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! shoulddisplay:" + hand_PreviewProvider.shouldDisplay(preview), createToolboxTooltip.NAME, Create.VERSION);
-            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! preview.stack.getTagEl:" + preview.stack().getTagElement("Inventory"), createToolboxTooltip.NAME, Create.VERSION);
-            // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! addtooltip:" + hand_PreviewProvider.addTooltip(preview), createToolboxTooltip.NAME, Create.VERSION);
-
-            // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! InventoryShulker:" + inventoryShulker, createToolboxTooltip.NAME, Create.VERSION);
-            // for (ItemStack stack : inventoryShulker) {
-            //     createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! item:" + stack.getItem() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
-            // }
-
-            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! Inventory:" + inventory, createToolboxTooltip.NAME, Create.VERSION);
-            for (ItemStack stack : inventory) {
-                createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! item:" + stack.getItem() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
-                // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! max stack size:" + stack.getMaxStackSize() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
-            }
-
-            createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! comp:" + compartments, createToolboxTooltip.NAME, Create.VERSION);
-            for (ItemStack stack : compartments) {
-                createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! compp item:" + stack.getItem() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
-                // createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz! max stack size:" + stack.getMaxStackSize() + handItemStack.getItem(), createToolboxTooltip.NAME, Create.VERSION);
-            }
-
-            return InteractionResult.PASS;
-        });
-    }
-    // <item:minecraft:pink_shulker_box>.withTag({BlockEntityTag: {id: "minecraft:shulker_box", Items: [{Slot: 0, id: "create:belt_connector", Count: 64}, {Slot: 1, id: "create:hand_crank", Count: 27}, {Slot: 2, id: "create:depot", Count: 64}, {Slot: 3, id: "create:chute", Count: 64}]}})
-    // <item:create:brown_toolbox>.withTag({UniqueId: [-1971438192, 1141326940, -1225447979, -1616495346], Inventory: {Size: 32, Items: [{Slot: 0, Count: 64, id: "create:smart_chute"}, {Slot: 4, Count: 64, id: "create:speedometer"}, {Slot: 8, Count: 64, id: "create:mechanical_plough"}, {Slot: 9, Count: 64, id: "create:mechanical_plough"}, {Slot: 12, Count: 64, id: "create:portable_storage_interface"}, {Slot: 16, Count: 64, id: "create:deployer"}, {Slot: 20, Count: 64, id: "create:mechanical_saw"}, {Slot: 24, Count: 64, id: "create:creative_motor"}], Compartments: [{id: "create:smart_chute", Count: 1}, {id: "create:speedometer", Count: 1}, {id: "create:mechanical_plough", Count: 1}, {id: "create:portable_storage_interface", Count: 1}, {id: "create:deployer", Count: 1}, {id: "create:mechanical_saw", Count: 1}, {id: "create:creative_motor", Count: 1}, {id: "minecraft:air", Count: 0, tag: {Damage: 0}}]}})
-    // public boolean isPreviewAvailable(PreviewContext context) {
-    //     createToolboxTooltip.LOGGER.info("[{}] toolboxing deez nutz!" + ShulkerBoxTooltipClient.isPreviewAvailable(context), createToolboxTooltip.NAME, Create.VERSION);
-
-    //     return ShulkerBoxTooltipClient.isPreviewAvailable(context);
-    // }
-
-    // get all the different colored toolboxes into an array of items
+    
+    /**
+     * Gets all the different colored toolboxes into an array of items
+     */
     static {
         Iterator<BlockEntry<ToolboxBlock>> toolboxIterator = AllBlocks.TOOLBOXES.iterator();
         TOOLBOX_ITEMS = new Item[DyeColor.values().length];

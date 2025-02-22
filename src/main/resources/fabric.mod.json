@@ -10,8 +10,8 @@
   "contact": {
     "sources": "https://github.com/yisylvie/create-toolbox-tooltip"
   },
-  "license": "CC0",
-  "icon": "assets/createtoolboxtooltip/icon.png",
+  "license": "MIT",
+  "icon": "assets/create-toolbox-tooltip/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

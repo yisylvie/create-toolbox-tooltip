@@ -13,7 +13,6 @@ version = "$mod_version+$minecraft_version" + (buildNumber != null ? "-build.$bu
 
 repositories {
 	maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
-	// maven { url = 'https://repo.spongepowered.org/repository/maven-public' } // adding in spongepowered
 	maven { url = "https://mvn.devos.one/releases" } // Porting Lib releases
 	maven { url = "https://mvn.devos.one/snapshots" } // Create and several dependencies
 	maven { url = "https://maven.tterrag.com/" } // Flywheel
@@ -63,7 +62,7 @@ dependencies {
 	// Create - dependencies are added transitively
 	modImplementation("com.simibubi.create:create-fabric-$minecraft_version:$create_version")
 
-	// Shulkerbox tooltip
+	// Shulker Box tooltip
 	modImplementation "curse.maven:shulkerboxtooltip-315811:4611154"
 
 	modApi("me.shedaniel.cloth:cloth-config-fabric:$cloth_config_api_version") {
