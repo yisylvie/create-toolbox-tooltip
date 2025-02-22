@@ -7,8 +7,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
-import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
-import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorKey;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorRegistry;
 import com.misterpemodder.shulkerboxtooltip.api.provider.BlockEntityPreviewProvider;

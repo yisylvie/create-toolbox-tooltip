@@ -1,7 +1,5 @@
 package com.yisylvie.createtoolboxtooltip;
 
-import com.simibubi.create.Create;
-import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.ResourceLocation;
