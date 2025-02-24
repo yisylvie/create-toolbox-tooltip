@@ -4,7 +4,7 @@
 
 This addon mod shows a tooltip which displays the contents of Create toolboxes when hovering over them in your inventory.
 
-<br><br>
+<br>
 
 <img src="images/compact_preview.png" alt="Compact Preview Window" width="80%"/> 
 <img src="images/full_preview.png" alt="Full Preview Window" width="80%"/>
@@ -12,8 +12,6 @@ This addon mod shows a tooltip which displays the contents of Create toolboxes w
 This mod was made using the Shulker Box Tooltip API. You can find its configurations under the Shulker Box Tooltip mod's config in Mod Menu (you will need to have Mod Menu installed first). Check out their [Wiki](https://github.com/MisterPeModder/ShulkerBoxTooltip/wiki) and [Modrinth](https://modrinth.com/mod/shulkerboxtooltip) page for more info.
 
 Big thanks to the creators of Shulker Box Tooltip for making this mod a possibility!
-
-<br>
 
 ## Features:
 
