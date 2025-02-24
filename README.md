@@ -41,7 +41,7 @@ Displays empty item stacks
 -   [Create v0.5.1-f-build.1417](https://modrinth.com/mod/create-fabric/version/0.5.1-f-build.1417+mc1.20.1) (and all its dependencies)
 -   [Shulker Box Tooltip v4.0.4](https://modrinth.com/mod/shulkerboxtooltip/version/4.0.4+1.20.1-fabric) (and all its dependencies)
 
-### Recomended:
+### Recommended:
 
 -   [Mod Menu](https://modrinth.com/mod/modmenu)
 
