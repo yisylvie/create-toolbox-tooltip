@@ -9,7 +9,8 @@
   ],
   "contact": {
     "sources": "https://github.com/yisylvie/create-toolbox-tooltip",
-    "issues": "https://github.com/yisylvie/create-toolbox-tooltip/issues"
+    "issues": "https://github.com/yisylvie/create-toolbox-tooltip/issues",
+    "homepage": "https://modrinth.com/mod/create-toolbox-tooltip/"
   },
   "license": "MIT",
   "icon": "assets/create-toolbox-tooltip/icon.png",
