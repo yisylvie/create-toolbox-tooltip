@@ -13,7 +13,7 @@ This mod was made using the Shulker Box Tooltip API. You can find its configurat
 
 Big thanks to the creators of Shulker Box Tooltip for making this mod a possibility!
 
-<br><br>
+<br>
 
 ## Features:
 
@@ -27,7 +27,7 @@ Big thanks to the creators of Shulker Box Tooltip for making this mod a possibil
 
 Displays empty item stacks
 
-<br><br>
+<br>
 
 ### Coming Soon:
 
