@@ -8,7 +8,8 @@
     "Sylvie Lee"
   ],
   "contact": {
-    "sources": "https://github.com/yisylvie/create-toolbox-tooltip"
+    "sources": "https://github.com/yisylvie/create-toolbox-tooltip",
+    "issues": "https://github.com/yisylvie/create-toolbox-tooltip/issues"
   },
   "license": "MIT",
   "icon": "assets/create-toolbox-tooltip/icon.png",
