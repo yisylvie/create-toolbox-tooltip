@@ -28,7 +28,7 @@ Displays empty item stacks.
 ### Coming Soon:
 
 -   Support for Forge/NeoForge
--   Support for other versions of Create and Minecraft
+-   Support for other versions of Minecraft
 -   Ability to toggle on/off Create's default tooltip for toolboxes
 
 ## Dependencies:
