@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "parent": "createtoolboxtooltip-common.mixins.json",
+  "package": "com.yisylvie.createtoolboxtooltip.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

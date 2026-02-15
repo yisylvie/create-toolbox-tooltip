@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "createtoolboxtooltip",
+  "version": "${version}",
+  "name": "Create Toolbox Tooltip",
+  "description": "What's in my toolbox?",
+  "authors": [
+    "Sylvie Lee"
+  ],
+  "contact": {
+    "sources": "https://github.com/yisylvie/create-toolbox-tooltip",
+    "issues": "https://github.com/yisylvie/create-toolbox-tooltip/issues",
+    "homepage": "https://modrinth.com/mod/create-toolbox-tooltip/"
+  },
+  "license": "MIT",
+  "icon": "assets/create-toolbox-tooltip/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.yisylvie.createtoolboxtooltip.fabric.createToolboxTooltipFabric"
+    ]
+  },
+  "mixins": [
+    "createtoolboxtooltip-fabric.mixins.json",
+    "createtoolboxtooltip-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20.1"
+  }
+}

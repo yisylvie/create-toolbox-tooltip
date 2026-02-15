@@ -1,1 +1,0 @@
-I just copied and pasted what I hoped to be the word for toolboxes from the corresponding Create lang .json, so these translations might not be completely accurate. Feel free to submit a pull request if you'd like to correct any of them.

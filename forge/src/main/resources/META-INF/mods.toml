@@ -1,0 +1,27 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+issueTrackerURL = "https://github.com/yisylvie/create-toolbox-tooltip/issues"
+displayURL = "https://modrinth.com/mod/create-toolbox-tooltip/"
+license = "MIT"
+
+[[mods]]
+modId = "createtoolboxtooltip"
+version = "${version}"
+displayName = "Create Toolbox Tooltip"
+authors = "Sylvie Lee"
+description = "What's in my toolbox?"
+logoFile = "icon.png"
+
+[[dependencies.createtoolboxtooltip]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.createtoolboxtooltip]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"

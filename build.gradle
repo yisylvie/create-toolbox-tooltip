@@ -1,119 +1,54 @@
 plugins {
-	id "fabric-loom" version "1.8.+"
-	id "maven-publish"
+    id "architectury-plugin" version "3.4.+"
+    id "dev.architectury.loom" version "1.7.+" apply false
 }
 
-base.archivesName = archives_base_name
-group = project.maven_group
+architectury {
+    minecraft = rootProject.minecraft_version
+}
 
-// Formats the mod version to include the Minecraft version and build number (if present)
-// example: 1.0.0+1.18.2-build.100
-String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-version = "$mod_version+$minecraft_version-fabric" + (buildNumber != null ? "-build.$buildNumber" : "")
+subprojects {
+    apply plugin: "dev.architectury.loom"
 
-repositories {
-	maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
-	maven { url = "https://mvn.devos.one/releases" } // Porting Lib releases
-	maven { url = "https://mvn.devos.one/snapshots" } // Create and several dependencies
-	maven { url = "https://maven.tterrag.com/" } // Flywheel
-	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
-	maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
-
-	maven { url "https://maven.shedaniel.me/" } // cloth config
-    maven { url "https://maven.terraformersmc.com/releases/" }
-
-	maven { // Fabric ASM for Porting Lib
-		url = "https://jitpack.io/"
-		content { includeGroupAndSubgroups("com.github") }
-	}
-
-	maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
+    loom {
+        silentMojangMappingsLicense()
     }
 
-	maven { url = "https://maven.shedaniel.me" } // Cloth Config, REI
-	maven { url = "https://maven.blamejared.com" } // JEI
-
-	maven { url = "https://maven.terraformersmc.com/releases" } // Mod Menu, EMI
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        // The following line declares the mojmap mappings, you may use other mappings as well
+        mappings loom.officialMojangMappings()
+        // The following line declares the yarn mappings you may select this one as well.
+        // mappings "net.fabricmc:yarn:1.20.1+build.10:v2"
+    }
 }
 
-configurations.configureEach {
-	resolutionStrategy {
-		// make sure the desired version of loader is used. Sometimes old versions are pulled in transitively.
-		force("net.fabricmc:fabric-loader:$fabric_loader_version")
-	}
-}
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
 
-dependencies {
-	// Setup
-	minecraft("com.mojang:minecraft:$minecraft_version")
-	mappings(loom.layered {
-		it.officialMojangMappings { nameSyntheticMembers = false }
-		it.parchment("org.parchmentmc.data:parchment-$minecraft_version:$parchment_version@zip")
-	})
-	modImplementation("net.fabricmc:fabric-loader:$fabric_loader_version")
-
-	// dependencies
-	modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_api_version")
-	
-	// Create - dependencies are added transitively
-	modImplementation("com.simibubi.create:create-fabric-$minecraft_version:$create_version")
-
-	// Shulker Box tooltip
-	modImplementation "curse.maven:shulkerboxtooltip-315811:4611154"
-
-	modApi("me.shedaniel.cloth:cloth-config-fabric:$cloth_config_api_version") {
-        exclude(group: "net.fabricmc.fabric-api")
+    base {
+        archivesName = rootProject.archives_base_name
     }
 
-	// Development QOL
-	modLocalRuntime("com.terraformersmc:modmenu:$modmenu_version")
+    version = rootProject.mod_version
+    group = rootProject.maven_group
 
-	// Recipe Viewers - Create Fabric supports JEI, REI, and EMI.
-	// See root gradle.properties to choose which to use at runtime.
-	switch (recipe_viewer.toLowerCase(Locale.ROOT)) {
-		case "jei": modLocalRuntime("mezz.jei:jei-$minecraft_version-fabric:$jei_version"); break
-		case "rei": modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"); break
-		case "emi": modLocalRuntime("dev.emi:emi-fabric:$emi_version"); break
-		case "disabled": break
-		default: println("Unknown recipe viewer specified: $recipe_viewer. Must be JEI, REI, EMI, or disabled.")
-	}
-	// if you would like to add integration with them, uncomment them here.
-//    modCompileOnly("mezz.jei:jei-$minecraft_version-fabric:$jei_fabric_version")
-//    modCompileOnly("mezz.jei:jei-$minecraft_version-common:$jei_fabric_version")
-//    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version")
-//    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version")
-//    modCompileOnly("dev.emi:emi:$emi_version")
-}
+    repositories {
+        // Add repositories to retrieve artifacts from in here.
+        // You should only use this when depending on other mods because
+        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+        // for more information about repositories.
+    }
 
-processResources {
-	// require dependencies to be the version compiled against or newer
-	Map<String, Object> properties = [
-			"version": version,
-			"fabric_loader_version": fabric_loader_version,
-			"fabric_api_version": fabric_api_version,
-			"create_version": create_version,
-			"shulkerboxtooltip_version": shulkerboxtooltip_version,
-			"cloth_config_api_version": cloth_config_api_version,
-			"minecraft_version": minecraft_version
-	]
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.release = 17
+    }
 
-	inputs.properties(properties)
-
-	filesMatching("fabric.mod.json") {
-		expand properties
-	}
-}
-
-java {
-	withSourcesJar()
-}
-
-jar {
-	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}" }
-	}
+    java {
+        withSourcesJar()
+    }
 }
