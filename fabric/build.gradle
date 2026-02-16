@@ -62,6 +62,13 @@ dependencies {
 
     // dependencies
 
+    // Shulkerbox Tooltip
+    modImplementation("com.misterpemodder:shulkerboxtooltip-fabric:$shulkerboxtooltip_version") { transitive false }
+
+    modApi("me.shedaniel.cloth:cloth-config-fabric:$cloth_config_api_version") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    
     // Create - dependencies are added transitively
     modImplementation("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
 
@@ -87,7 +94,7 @@ processResources {
             "fabric_api_version": fabric_api_version,
             "minecraft_version": minecraft_version,
             "create_version": create_fabric_version, // on fabric, use the entire version, unlike forge
-    		// "shulkerboxtooltip_version": shulkerboxtooltip_version,
+    		"shulkerboxtooltip_version": shulkerboxtooltip_version
 ]
     inputs.properties(properties)
     

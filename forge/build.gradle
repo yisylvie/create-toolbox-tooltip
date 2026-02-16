@@ -35,6 +35,13 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
+    // dependencies
+
+    // Shulkerbox Tooltip
+    modImplementation("com.misterpemodder:shulkerboxtooltip-forge:$shulkerboxtooltip_version") { transitive false }
+    // cloth config
+    modApi("me.shedaniel.cloth:cloth-config-forge:$cloth_config_api_version") 
+
     // Create and its dependencies
     modImplementation("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim") { transitive = false }
     modImplementation("com.tterrag.registrate:Registrate:$registrate_forge_version")
@@ -51,6 +58,7 @@ processResources {
             "forge_version": forge_version.split("\\.")[0], // only specify major version of forge
             "minecraft_version": minecraft_version,
             "flywheel_version": flywheel_forge_version,
+    		"shulkerboxtooltip_version": shulkerboxtooltip_version,
             "create_version": create_forge_version.split("-")[0] // cut off build number
     ]
     inputs.properties(properties)
