@@ -42,6 +42,8 @@ dependencies {
 
     // Shulkerbox Tooltip
     modImplementation("com.misterpemodder:shulkerboxtooltip-common:$shulkerboxtooltip_version") { transitive false }
+    // Cloth-Config
+    modApi("me.shedaniel.cloth:cloth-config:$cloth_config_api_version")
 }
 
 // publishing {

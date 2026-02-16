@@ -1,10 +1,16 @@
 package com.yisylvie.createtoolboxtooltip.forge;
 
+import com.yisylvie.createtoolboxtooltip.createToolboxTooltipPlugin;
+import com.misterpemodder.shulkerboxtooltip.api.forge.ShulkerBoxTooltipPlugin;
 import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
+
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod(createToolboxTooltip.MOD_ID)
+@Mod(createToolboxTooltip.ID)
 public class createToolboxTooltipForge {
     public createToolboxTooltipForge() {
+        ModLoadingContext.get().registerExtensionPoint(ShulkerBoxTooltipPlugin.class,
+                () -> new ShulkerBoxTooltipPlugin(createToolboxTooltipPlugin::new));
     }
 }

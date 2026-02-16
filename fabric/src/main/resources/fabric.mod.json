@@ -17,7 +17,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.yisylvie.createtoolboxtooltip.fabric.createToolboxTooltipFabric"
+      "com.yisylvie.createtoolboxtooltip.createToolboxTooltip"
+    ],
+    "shulkerboxtooltip": [
+      "com.yisylvie.createtoolboxtooltip.createToolboxTooltipPlugin"
     ]
   },
   "mixins": [
