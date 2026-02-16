@@ -1,10 +1,6 @@
 # Create Toolbox Tooltip
 
-<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/fabric_vector.svg" alt="Available for Fabric" width="200"/> </a>
-
-<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/forge_vector.svg" alt="Available for Forge" width="200"/> </a>
-
-<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/neoforge_vector.svg" alt="Available for NeoForge" width="200"/> </a>
+<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/fabric_vector.svg" alt="Available for Fabric" width="200"/> </a><a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/forge_vector.svg" alt="Available for Forge" width="200"/> </a> <a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/neoforge_vector.svg" alt="Available for NeoForge" width="200"/> </a> <a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/quilt_vector.svg" alt="Available for Quilt" width="200"/> </a>
 
 This addon mod shows a tooltip which displays the contents of Create toolboxes when hovering over them in your inventory.
 
@@ -13,7 +9,7 @@ This addon mod shows a tooltip which displays the contents of Create toolboxes w
 <img src="images/compact_preview.png" alt="Compact Preview Window" width="80%" margin="auto"/> 
 <img src="images/full_preview.png" alt="Full Preview Window" width="80%" margin="auto"/>
 
-This mod was made using the Shulker Box Tooltip API. You can edit its configurations under the Shulker Box Tooltip mod's config in Mod Menu (you will need to have Mod Menu installed first). Check out their [Wiki](https://github.com/MisterPeModder/ShulkerBoxTooltip/wiki) and [Modrinth](https://modrinth.com/mod/shulkerboxtooltip) page for more info.
+This mod was made using the Shulker Box Tooltip API. You can edit its configurations under the Shulker Box Tooltip mod's config in Mod Menu (on Quilt/Fabric, you will need to have Mod Menu installed first). Check out their [Wiki](https://github.com/MisterPeModder/ShulkerBoxTooltip/wiki) and [Modrinth](https://modrinth.com/mod/shulkerboxtooltip) page for more info.
 
 Big thanks to the creators of Shulker Box Tooltip for making this mod a possibility!
 
@@ -41,7 +37,7 @@ Displays empty item stacks.
 
 ### Recommended:
 
--   [Mod Menu](https://modrinth.com/mod/modmenu)
+-   [Mod Menu](https://modrinth.com/mod/modmenu) (On Quilt/Fabric)
 
 #### License
 

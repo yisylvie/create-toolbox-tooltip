@@ -27,10 +27,13 @@ configurations {
     developmentForge.extendsFrom common
 }
 
+// Formats the mod version to include the Minecraft version and build number (if present)
+// example: 1.0.0+1.18.2-build.100
+String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
+version = "$mod_version+$minecraft_version-forge" + (buildNumber != null ? "-build.$buildNumber" : "")
+
 dependencies {
     forge("net.minecraftforge:forge:$minecraft_version-$forge_version")
-    // Remove the next line if you don't want to depend on the API
-    // modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
@@ -97,17 +100,3 @@ components.java {
         skip()
     }
 }
-
-// publishing {
-//     publications {
-//         mavenForge(MavenPublication) {
-//             artifactId = rootProject.archives_base_name + "-" + project.name
-//             from components.java
-//         }
-//     }
-
-//     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-//     repositories {
-//         // Add repositories to publish to here.
-//     }
-// }

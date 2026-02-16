@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod(createToolboxTooltip.ID)
 public class createToolboxTooltipImpl {
     public createToolboxTooltipImpl() {
+        // plugin registration
         ModLoadingContext.get().registerExtensionPoint(ShulkerBoxTooltipPlugin.class,
                 () -> new ShulkerBoxTooltipPlugin(createToolboxTooltipPlugin::new));
     }

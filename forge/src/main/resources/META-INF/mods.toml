@@ -22,20 +22,20 @@ side = "BOTH"
 [[dependencies.createtoolboxtooltip]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.1,)"
+versionRange = "${minecraft_version}"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.createtoolboxtooltip]]
-modId="create"
-mandatory=true
-versionRange="${create_version}"
-ordering="NONE"
-side="BOTH"
+modId = "create"
+mandatory = true
+versionRange = "${create_version}"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.createtoolboxtooltip]]
-modId="shulkerboxtooltip"
-mandatory=true
-versionRange="${shulkerboxtooltip_version}"
-ordering="NONE"
-side="BOTH"
+modId = "shulkerboxtooltip"
+mandatory = true
+versionRange = "${shulkerboxtooltip_version}"
+ordering = "NONE"
+side = "BOTH"
