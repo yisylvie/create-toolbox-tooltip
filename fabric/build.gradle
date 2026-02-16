@@ -62,7 +62,7 @@ dependencies {
 
     // dependencies
 
-    // Shulkerbox Tooltip
+    // Shulker Box Tooltip
     modImplementation("com.misterpemodder:shulkerboxtooltip-fabric:$shulkerboxtooltip_version") { transitive false }
 
     modApi("me.shedaniel.cloth:cloth-config-fabric:$cloth_config_api_version") {

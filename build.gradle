@@ -21,7 +21,7 @@ subprojects {
         maven { url = "https://maven.blamejared.com/" } // JEI
         maven { url = "https://maven.tterrag.com/" } // Flywheel on both, Create and Registrate on forge
         maven { url = "https://modmaven.dev/" } // Flywheel
-        maven { url "https://maven.misterpemodder.com/libs-release/" } // Shulkerbox Tooltip
+        maven { url "https://maven.misterpemodder.com/libs-release/" } // Shulker Box Tooltip
     }
 
     dependencies {

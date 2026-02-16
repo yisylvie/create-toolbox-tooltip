@@ -40,7 +40,7 @@ dependencies {
     // Flywheel and Registrate must also be used carefully due to differences across loaders.
     modCompileOnly("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
 
-    // Shulkerbox Tooltip
+    // Shulker Box Tooltip
     modImplementation("com.misterpemodder:shulkerboxtooltip-common:$shulkerboxtooltip_version") { transitive false }
     // Cloth-Config
     modApi("me.shedaniel.cloth:cloth-config:$cloth_config_api_version")
