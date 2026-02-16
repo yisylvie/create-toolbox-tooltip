@@ -3,15 +3,6 @@
   "package": "com.yisylvie.createtoolboxtooltip.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "client": [
-    "BasePreviewRendererMixin",
-    "ModPreviewRendererMixin",
-    "ShulkerBoxTooltipClientMixin",
-    "PreviewTooltipComponentMixin",
-    "VanillaPreviewRendererMixin"
-  ],
-  "mixins": [
-  ],
   "injectors": {
     "defaultRequire": 1
   }

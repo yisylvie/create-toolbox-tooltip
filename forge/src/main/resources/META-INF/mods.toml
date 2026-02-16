@@ -11,6 +11,7 @@ displayName = "Create Toolbox Tooltip"
 authors = "Sylvie Lee"
 description = "What's in my toolbox?"
 logoFile = "icon.png"
+displayURL = "https://modrinth.com/mod/create-toolbox-tooltip"
 
 [[dependencies.createtoolboxtooltip]]
 modId = "forge"
@@ -29,7 +30,7 @@ side = "BOTH"
 [[dependencies.createtoolboxtooltip]]
 modId = "create"
 mandatory = true
-versionRange = "${create_version}"
+versionRange = "[0,)"
 ordering = "NONE"
 side = "BOTH"
 

@@ -12,6 +12,6 @@ public class createToolboxTooltipImpl {
     public createToolboxTooltipImpl() {
         // plugin registration
         ModLoadingContext.get().registerExtensionPoint(ShulkerBoxTooltipPlugin.class,
-                () -> new ShulkerBoxTooltipPlugin(createToolboxTooltipPlugin::new));
+            () -> new ShulkerBoxTooltipPlugin(createToolboxTooltipPlugin::new));
     }
 }
