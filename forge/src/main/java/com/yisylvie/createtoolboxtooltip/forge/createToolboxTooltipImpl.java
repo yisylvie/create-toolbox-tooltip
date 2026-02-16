@@ -8,8 +8,8 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod(createToolboxTooltip.ID)
-public class createToolboxTooltipForge {
-    public createToolboxTooltipForge() {
+public class createToolboxTooltipImpl {
+    public createToolboxTooltipImpl() {
         ModLoadingContext.get().registerExtensionPoint(ShulkerBoxTooltipPlugin.class,
                 () -> new ShulkerBoxTooltipPlugin(createToolboxTooltipPlugin::new));
     }
