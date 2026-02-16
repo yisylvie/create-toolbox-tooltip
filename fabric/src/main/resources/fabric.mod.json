@@ -29,5 +29,8 @@
     "fabric-api": ">=${fabric_api_version}",
     "create": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu": "*"
   }
 }
