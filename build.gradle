@@ -14,6 +14,15 @@ subprojects {
         silentMojangMappingsLicense()
     }
 
+    repositories {
+        maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
+
+        // mavens used on both forge and fabric
+        maven { url = "https://maven.blamejared.com/" } // JEI
+        maven { url = "https://maven.tterrag.com/" } // Flywheel on both, Create and Registrate on forge
+        maven { url = "https://modmaven.dev/" } // Flywheel
+    }
+
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         // The following line declares the mojmap mappings, you may use other mappings as well

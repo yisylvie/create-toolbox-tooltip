@@ -19,21 +19,68 @@ configurations {
     developmentFabric.extendsFrom common
 }
 
+repositories {
+    // mavens for Create Fabric and dependencies
+    maven { url = "https://mvn.devos.one/releases" } // Porting Lib releases
+    maven { url = "https://mvn.devos.one/snapshots" } // Create and several dependencies
+    maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
+
+    maven { // Fabric ASM for Porting Lib
+        url = "https://jitpack.io/"
+        content { includeGroupAndSubgroups("com.github") }
+    }
+
+    // maven { // For Shulker Box Tooltip
+    //     url "https://cursemaven.com"
+    //     content {
+    //         includeGroup "curse.maven"
+    //     }
+    // }
+
+    maven { url = "https://maven.shedaniel.me" } // Cloth Config, REI
+    maven { url = "https://maven.blamejared.com" } // JEI
+    maven { url = "https://maven.terraformersmc.com/releases" } // Mod Menu, EMI
+}
+
+configurations.configureEach {
+    resolutionStrategy {
+        // make sure the desired version of loader is used. Sometimes old versions are pulled in transitively.
+        force("net.fabricmc:fabric-loader:$fabric_loader_version")
+    }
+}
+
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation("net.fabricmc:fabric-loader:$fabric_loader_version")
+	modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_api_version")
+
     // Remove the next line if you don't want to depend on the API
     // modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    // dependencies
+
+    // Create - dependencies are added transitively
+    modImplementation("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
+
 }
 
 processResources {
-    inputs.property "version", project.version
-
+    // set up properties for filling into metadata
+    Map<String, Object> properties = [
+            "version": version,
+            "fabric_loader_version": fabric_loader_version,
+            "fabric_api_version": fabric_api_version,
+            "minecraft_version": minecraft_version,
+            "create_version": create_fabric_version, // on fabric, use the entire version, unlike forge
+    		// "shulkerboxtooltip_version": shulkerboxtooltip_version,
+]
+    inputs.properties(properties)
+    
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand properties
     }
 }
 
@@ -48,6 +95,10 @@ remapJar {
     injectAccessWidener = true
     input.set shadowJar.archiveFile
     dependsOn shadowJar
+}
+
+jar {
+    archiveClassifier = "dev"
 }
 
 sourcesJar {
