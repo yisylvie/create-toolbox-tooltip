@@ -1,9 +1,6 @@
 # Create Toolbox Tooltip
 
-<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/fabric_vector.svg" alt="Available for Fabric" width="200"/> </a>
-<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/forge_vector.svg" alt="Available for Forge" width="200"/> </a> 
-<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/neoforge_vector.svg" alt="Available for NeoForge" width="200"/> </a> 
-<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"> <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/quilt_vector.svg" alt="Available for Quilt" width="200"/> </a>
+<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/fabric_vector.svg" alt="Available for Fabric" width="200"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/forge_vector.svg" alt="Available for Forge" width="200"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/neoforge_vector.svg" alt="Available for NeoForge" width="200"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/quilt_vector.svg" alt="Available for Quilt" width="200"/></a>
 
 This addon mod shows a tooltip which displays the contents of Create toolboxes when hovering over them in your inventory.
 
