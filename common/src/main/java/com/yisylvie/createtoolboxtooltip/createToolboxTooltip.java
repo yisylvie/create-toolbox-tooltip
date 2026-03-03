@@ -4,6 +4,10 @@ import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.ResourceLocation;
 
+// import java.lang.module.Configuration;
+import java.lang.reflect.Field;
+
+import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
