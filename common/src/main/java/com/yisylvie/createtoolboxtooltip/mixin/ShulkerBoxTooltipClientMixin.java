@@ -4,7 +4,6 @@ import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -23,6 +22,9 @@ import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * If an inventory is empty, but not the compartments,
@@ -43,7 +45,8 @@ public abstract class ShulkerBoxTooltipClientMixin {
             value = "INVOKE",
 			target = "Lnet/minecraft/network/chat/MutableComponent;append(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;",
             ordinal = 2
-        )
+        ),
+		remap = false
     )
     private static MutableComponent createtoolboxtooltip$changePreviewKeyHint(
             MutableComponent previewKeyHint,
@@ -74,16 +77,14 @@ public abstract class ShulkerBoxTooltipClientMixin {
     /**
      * Since there is no compact mode when isInventoryEmpty, we never
      * want to display a keybind tooltip when the preview type is full
-
-	 * We don't want to display keybind tooltips for other container
-	 * types when "enable only toolboxes" is set to true
      */
     @Inject(
         method = "getPreviewKeyTooltipHint",
         at = @At(
             value = "HEAD"
         ),
-        cancellable = true
+        cancellable = true,
+		remap = false
     )
     private static void createtoolboxtooltip$removePreviewKeyHint(
             PreviewContext context, PreviewProvider provider, boolean previewRequested,
@@ -95,9 +96,7 @@ public abstract class ShulkerBoxTooltipClientMixin {
                         == PreviewType.FULL) {
                 cir.setReturnValue(null);
             }
-        } else if (((PreviewCategoryAccess) ShulkerBoxTooltip.config.preview).createtoolboxtooltip$getEnableOnlyToolboxes()) {
-			cir.setReturnValue(null);
-		}
+        }
 	}
 
     /**
@@ -108,7 +107,8 @@ public abstract class ShulkerBoxTooltipClientMixin {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;"
-        )
+        ),
+		remap = false
     )
     private static String createtoolboxtooltip$changeContentHint(
             String contentHint,
@@ -122,6 +122,28 @@ public abstract class ShulkerBoxTooltipClientMixin {
         }
         return contentHint;
     }
+
+	/**
+	 * We don't want to display keybind tooltips for other container
+	 * types when "enable only toolboxes" is set to true
+	 */
+	@Inject(
+			method = "getTooltipHints",
+			at = @At(
+				value = "HEAD"
+			),
+			cancellable = true,
+			remap = false
+	)
+	private static void createtoolboxtooltip$previewTooltipAvailableWithToolboxes(
+			PreviewContext context,
+			PreviewProvider provider,
+			CallbackInfoReturnable<List<Component>> cir) {
+		if (((PreviewCategoryAccess) ShulkerBoxTooltip.config.preview).createtoolboxtooltip$getEnableOnlyToolboxes()
+				&& !(provider instanceof ToolboxPreviewProvider)) {
+			cir.setReturnValue(Collections.emptyList());
+		}
+	}
 
 	/**
 	 * We want to turn off the Shulker Box tooltips for everything but

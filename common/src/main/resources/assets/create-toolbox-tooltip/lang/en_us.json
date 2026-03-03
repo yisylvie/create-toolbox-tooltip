@@ -1,5 +1,5 @@
 {
     "shulkerboxtooltip.colors.create.toolboxes": "Toolboxes",
     "text.autoconfig.shulkerboxtooltip.option.preview.createtoolboxtooltip$enableOnlyToolboxes": "Enable only toolbox previews",
-    "text.autoconfig.shulkerboxtooltip.option.preview.createtoolboxtooltip$enableOnlyToolboxes.tooltip": "Turn off every preview type besides toolboxes to prevent incompatibilities with other mods."
+    "text.autoconfig.shulkerboxtooltip.option.preview.createtoolboxtooltip$enableOnlyToolboxes.tooltip": "Turn off every preview type besides toolboxes \nto prevent incompatibilities with other mods."
 }

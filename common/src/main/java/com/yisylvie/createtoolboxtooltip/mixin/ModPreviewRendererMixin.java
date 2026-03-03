@@ -24,12 +24,13 @@ public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
      * and the preview type is full
      */
     @ModifyExpressionValue(
-        method = "draw", 
+        method = "draw",
         at = @At(
-            value = "INVOKE", 
+            value = "INVOKE",
             target = "Ljava/util/List;isEmpty()Z",
             ordinal = 0
-        )
+        ),
+		remap = false
     )
     private boolean createtoolboxtooltip$drawIfEmpty(boolean isEmpty) {
         if (this.provider instanceof ToolboxPreviewProvider) {

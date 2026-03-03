@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 	@Unique
 	@AutoTooltip
 	@Comment("""
-    	Turn off all of the stuffs besides toolboxes to prevent incompatibilities with other mods.
+   		Turn off every preview type besides toolboxes to prevent incompatibilities with other mods
    		""")
     public boolean createtoolboxtooltip$enableOnlyToolboxes = false;
 

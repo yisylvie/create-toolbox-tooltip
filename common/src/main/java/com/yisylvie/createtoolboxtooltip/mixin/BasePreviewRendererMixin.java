@@ -43,18 +43,19 @@ public abstract class BasePreviewRendererMixin {
 	 * and display item decorations for items with a stack size of 1.
 	 */
 	@Inject(
-		method = "drawItem", 
+		method = "drawItem",
 		at = @At(
 			value = "INVOKE",
 			target = "Lnet/minecraft/client/gui/GuiGraphics;renderItem(Lnet/minecraft/world/item/ItemStack;II)V"
 		),
-		cancellable = true
+		cancellable = true,
+		remap = false
 	)
-	private void createtoolboxtooltip$add0and1Stacks(ItemStack stack, int x, 
-			int y, GuiGraphics context, Font textRenderer, 
-			int slot, boolean shortItemCount, 
+	private void createtoolboxtooltip$add0and1Stacks(ItemStack stack, int x,
+			int y, GuiGraphics context, Font textRenderer,
+			int slot, boolean shortItemCount,
 			CallbackInfo ci) {
-				
+
 		if(this.provider instanceof ToolboxPreviewProvider && this.previewType == PreviewType.FULL) {
 			ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider)this.provider;
 
@@ -77,20 +78,21 @@ public abstract class BasePreviewRendererMixin {
 	 * drawItems() iterates over the inventory tag,
 	 * but we need to iterate over the compartments tag instead
 	 * when rendering an empty inventory with nonempty compartments
-	 * 
+	 *
 	 * @param itemsIterator the original items iterator
 	 * @return our new compartment iterator
 	 */
 	@ModifyVariable(
-		method = "drawItems", 
-		at = @At("STORE"), 
-		ordinal = 0
+		method = "drawItems",
+		at = @At("STORE"),
+		ordinal = 0,
+		remap = false
 	)
 	private Iterator<MergedItemStack> createtoolboxtooltip$changeDrawItemsIterator(
 			Iterator<MergedItemStack> itemsIterator) {
 		if(this.provider instanceof ToolboxPreviewProvider && !itemsIterator.hasNext()) {
 			return createtoolboxtooltip$getCompartmentIterator(provider, previewContext, config);
-		} 
+		}
 		return itemsIterator;
 	}
 
@@ -98,14 +100,15 @@ public abstract class BasePreviewRendererMixin {
 	 * getStackAt() iterates over the inventory tag,
 	 * but we need to iterate over the compartments tag instead
 	 * so that we can show tooltips for empty stacks
-	 * 
+	 *
 	 * @param itemsIterator the original iterator
 	 * @return our new compartment iterator
 	 */
 	@ModifyVariable(
-		method = "getStackAt", 
-		at = @At("STORE"), 
-		ordinal = 0
+		method = "getStackAt",
+		at = @At("STORE"),
+		ordinal = 0,
+		remap = false
 	)
 	private Iterator<MergedItemStack> createtoolboxtooltip$changeGetStackAtIterator(
 			Iterator<MergedItemStack> itemsIterator) {

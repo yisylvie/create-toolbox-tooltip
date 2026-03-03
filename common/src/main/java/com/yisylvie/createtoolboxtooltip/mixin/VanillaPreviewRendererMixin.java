@@ -20,21 +20,22 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
         super(slotWidth, slotHeight, slotXOffset, slotYOffset);
     }
 
-    /** 
+    /**
      * Vanilla theme displays even if inventory is empty, so we must override for
-     * when there are nonempty compartments and the preview type is compact 
+     * when there are nonempty compartments and the preview type is compact
      */
     @Inject(
-        method = "draw", 
+        method = "draw",
         at = @At(value = "HEAD"),
-        cancellable = true
+        cancellable = true,
+		remap = false
     )
     private void createtoolboxtooltip$dontDrawIfEmpty(
-            int x, int y, GuiGraphics context, Font textRenderer, 
+            int x, int y, GuiGraphics context, Font textRenderer,
             int mouseX, int mouseY, CallbackInfo ci) {
         if (this.provider instanceof ToolboxPreviewProvider) {
             ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider)this.provider;
-            if(this.previewType == PreviewType.COMPACT 
+            if(this.previewType == PreviewType.COMPACT
                     && ToolboxPreviewProvider.getItemCount(toolboxProvider.getInventory(this.previewContext)) == 0) {
                 ci.cancel();
             }

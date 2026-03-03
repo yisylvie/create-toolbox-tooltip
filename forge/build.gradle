@@ -40,10 +40,14 @@ dependencies {
 
     // dependencies
 
+	// Mixin Extras needs to be added manually bc Forge does not come with it bundled
+	compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+	implementation(include("io.github.llamalad7:mixinextras-forge:0.4.1"))
+
     // Shulker Box Tooltip
     modImplementation("com.misterpemodder:shulkerboxtooltip-forge:$shulkerboxtooltip_version") { transitive false }
     // Cloth Config
-    modApi("me.shedaniel.cloth:cloth-config-forge:$cloth_config_api_version") 
+    modApi("me.shedaniel.cloth:cloth-config-forge:$cloth_config_api_version")
 
     // Create and its dependencies
     modImplementation("com.simibubi.create:create-$minecraft_version:$create_forge_version:slim") { transitive = false }

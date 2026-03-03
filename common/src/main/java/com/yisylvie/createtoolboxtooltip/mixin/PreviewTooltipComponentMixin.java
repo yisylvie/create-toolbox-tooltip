@@ -24,30 +24,30 @@ public abstract class PreviewTooltipComponentMixin {
 
     @Shadow(remap = false)
     private PreviewContext context;
-    
+
     /**
-     * We want tooltip hints but not the inventory to render when the preview 
-     * type is compact and isInventoryEmpty(). Doing so causes there to 
+     * We want tooltip hints but not the inventory to render when the preview
+     * type is compact and isInventoryEmpty(). Doing so causes there to
      * be a silly little gap where the inventory would have been displayed.
      * In this instance, we must override getHeight() to close that gap.
      */
     @Inject(
-        method = "getHeight", 
+        method = "getHeight",
         at = @At(
             value = "RETURN"
         ),
-        cancellable = true
-    ) 
+        cancellable = true,
+		remap = false
+    )
     private void createtoolboxtooltip$changeHeight(CallbackInfoReturnable<Integer> cir) {
         if (this.provider instanceof ToolboxPreviewProvider) {
             ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider)this.provider;
-            if (ShulkerBoxTooltip.config.preview.position == PreviewPosition.INSIDE 
-                    && ShulkerBoxTooltipApi.getCurrentPreviewType(this.provider.isFullPreviewAvailable(this.context)) 
+            if (ShulkerBoxTooltip.config.preview.position == PreviewPosition.INSIDE
+                    && ShulkerBoxTooltipApi.getCurrentPreviewType(this.provider.isFullPreviewAvailable(this.context))
                     == PreviewType.COMPACT
                     && toolboxProvider.isInventoryEmpty(this.context)) {
                 cir.setReturnValue(0);
             }
         }
-        return;
     }
 }
