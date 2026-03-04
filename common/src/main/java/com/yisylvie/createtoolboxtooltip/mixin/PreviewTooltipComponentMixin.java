@@ -36,8 +36,8 @@ public abstract class PreviewTooltipComponentMixin {
         at = @At(
             value = "RETURN"
         ),
-        cancellable = true,
-		remap = false
+        cancellable = true
+//		remap = false
     )
     private void createtoolboxtooltip$changeHeight(CallbackInfoReturnable<Integer> cir) {
         if (this.provider instanceof ToolboxPreviewProvider) {

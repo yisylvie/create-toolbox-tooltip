@@ -1,9 +1,20 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
+import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
+import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
+import com.misterpemodder.shulkerboxtooltip.impl.provider.PreviewProviderRegistryImpl;
+import com.simibubi.create.Create;
 import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
+
+import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
+
+import me.shedaniel.clothconfig2.api.ConfigCategory;
+
+import net.minecraft.resources.ResourceLocation;
 
 import org.spongepowered.asm.mixin.Mixin;
 
+import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
 import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
 import com.misterpemodder.shulkerboxtooltip.impl.config.annotation.AutoTooltip;
 

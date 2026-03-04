@@ -45,8 +45,9 @@ public abstract class ShulkerBoxTooltipClientMixin {
             value = "INVOKE",
 			target = "Lnet/minecraft/network/chat/MutableComponent;append(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;",
             ordinal = 2
-        ),
-		remap = false
+        )
+//		remap = false,
+//		require = 0
     )
     private static MutableComponent createtoolboxtooltip$changePreviewKeyHint(
             MutableComponent previewKeyHint,
@@ -83,8 +84,9 @@ public abstract class ShulkerBoxTooltipClientMixin {
         at = @At(
             value = "HEAD"
         ),
-        cancellable = true,
-		remap = false
+        cancellable = true
+//		remap = false,
+//		require = 0
     )
     private static void createtoolboxtooltip$removePreviewKeyHint(
             PreviewContext context, PreviewProvider provider, boolean previewRequested,
@@ -107,8 +109,9 @@ public abstract class ShulkerBoxTooltipClientMixin {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;"
-        ),
-		remap = false
+        )
+//		remap = false,
+//		require = 0
     )
     private static String createtoolboxtooltip$changeContentHint(
             String contentHint,
@@ -132,8 +135,9 @@ public abstract class ShulkerBoxTooltipClientMixin {
 			at = @At(
 				value = "HEAD"
 			),
-			cancellable = true,
-			remap = false
+			remap = false,
+			cancellable = true
+//			require = 0
 	)
 	private static void createtoolboxtooltip$previewTooltipAvailableWithToolboxes(
 			PreviewContext context,

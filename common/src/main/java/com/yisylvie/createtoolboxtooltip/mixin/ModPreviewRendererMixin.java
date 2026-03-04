@@ -29,8 +29,8 @@ public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
             value = "INVOKE",
             target = "Ljava/util/List;isEmpty()Z",
             ordinal = 0
-        ),
-		remap = false
+        )
+//		remap = false
     )
     private boolean createtoolboxtooltip$drawIfEmpty(boolean isEmpty) {
         if (this.provider instanceof ToolboxPreviewProvider) {

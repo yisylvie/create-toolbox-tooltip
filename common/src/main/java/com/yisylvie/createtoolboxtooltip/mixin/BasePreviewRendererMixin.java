@@ -48,8 +48,8 @@ public abstract class BasePreviewRendererMixin {
 			value = "INVOKE",
 			target = "Lnet/minecraft/client/gui/GuiGraphics;renderItem(Lnet/minecraft/world/item/ItemStack;II)V"
 		),
-		cancellable = true,
-		remap = false
+		cancellable = true
+//		remap = false
 	)
 	private void createtoolboxtooltip$add0and1Stacks(ItemStack stack, int x,
 			int y, GuiGraphics context, Font textRenderer,
@@ -85,8 +85,8 @@ public abstract class BasePreviewRendererMixin {
 	@ModifyVariable(
 		method = "drawItems",
 		at = @At("STORE"),
-		ordinal = 0,
-		remap = false
+		ordinal = 0
+//		remap = false
 	)
 	private Iterator<MergedItemStack> createtoolboxtooltip$changeDrawItemsIterator(
 			Iterator<MergedItemStack> itemsIterator) {
@@ -107,8 +107,8 @@ public abstract class BasePreviewRendererMixin {
 	@ModifyVariable(
 		method = "getStackAt",
 		at = @At("STORE"),
-		ordinal = 0,
-		remap = false
+		ordinal = 0
+//		remap = false
 	)
 	private Iterator<MergedItemStack> createtoolboxtooltip$changeGetStackAtIterator(
 			Iterator<MergedItemStack> itemsIterator) {

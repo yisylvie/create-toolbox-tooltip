@@ -1,5 +1,8 @@
 package com.yisylvie.createtoolboxtooltip;
 
+import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
+import com.misterpemodder.shulkerboxtooltip.impl.provider.PreviewProviderRegistryImpl;
+import com.simibubi.create.Create;
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 
 import java.util.Iterator;
@@ -24,7 +27,7 @@ import net.minecraft.world.item.Item;
 public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
     private static final Item[] TOOLBOX_ITEMS;
     private static final ResourceLocation toolboxResourceLocation = new ResourceLocation("create", "toolboxes");
-    
+
     @Override
     public void registerProviders(@Nonnull PreviewProviderRegistry registry) {
         registry.register(toolboxResourceLocation, new ToolboxPreviewProvider(), TOOLBOX_ITEMS);
@@ -59,7 +62,7 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
     private static String blockName(String block) {
         return "block.create." + block;
     }
-    
+
     /**
      * Gets all the different colored toolboxes into an array of items
      */
