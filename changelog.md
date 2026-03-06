@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Shulker Box Tooltip dependency to v5.1.8+1.21.1.
 
-## [1.0.3+1.20.1] - 2026-03-06
+## [1.0.3+1.20.1] — 2026-03-06
 
 ### Added
 
@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Switched changelog to [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
 
-## [1.0.2+1.20.1] - 2026-02-16
+## [1.0.2+1.20.1] — 2026-02-16
 
 ### Added
 
@@ -41,12 +41,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update to Architectury for multi-loader support.
 
-## [1.0.1+1.20.1] - 2025-03-03
+## [1.0.1+1.20.1] — 2025-03-03
 
 ### Added
 
 - Now works with every version of Create for mc1.20.1.
 
-## [1.0.0+1.20.1] - 2025-02-24
+## [1.0.0+1.20.1] — 2025-02-24
 
 - Initial Release.
