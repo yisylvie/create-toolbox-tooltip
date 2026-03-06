@@ -2,6 +2,7 @@ package com.yisylvie.createtoolboxtooltip.mixin;
 
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,10 +20,12 @@ import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration.PreviewPos
 @Mixin(PreviewTooltipComponent.class)
 public abstract class PreviewTooltipComponentMixin {
 
-    @Shadow(remap = false)
+    @Final
+	@Shadow(remap = false)
     private PreviewProvider provider;
 
-    @Shadow(remap = false)
+    @Final
+	@Shadow(remap = false)
     private PreviewContext context;
 
     /**
@@ -37,12 +40,10 @@ public abstract class PreviewTooltipComponentMixin {
             value = "RETURN"
         ),
         cancellable = true
-//		remap = false
     )
     private void createtoolboxtooltip$changeHeight(CallbackInfoReturnable<Integer> cir) {
-        if (this.provider instanceof ToolboxPreviewProvider) {
-            ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider)this.provider;
-            if (ShulkerBoxTooltip.config.preview.position == PreviewPosition.INSIDE
+        if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
+			if (ShulkerBoxTooltip.config.preview.position == PreviewPosition.INSIDE
                     && ShulkerBoxTooltipApi.getCurrentPreviewType(this.provider.isFullPreviewAvailable(this.context))
                     == PreviewType.COMPACT
                     && toolboxProvider.isInventoryEmpty(this.context)) {

@@ -43,7 +43,6 @@ dependencies {
 	// Mixin Extras needs to be added manually bc Forge does not come with it bundled
 	compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
 	implementation(include("io.github.llamalad7:mixinextras-forge:0.4.1"))
-//	annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 
     // Shulker Box Tooltip
     modImplementation("com.misterpemodder:shulkerboxtooltip-forge:$shulkerboxtooltip_version") { transitive false }

@@ -28,7 +28,6 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
         method = "draw",
         at = @At(value = "HEAD"),
         cancellable = true
-//		remap = false
     )
     private void createtoolboxtooltip$dontDrawIfEmpty(
             int x, int y, GuiGraphics context, Font textRenderer,

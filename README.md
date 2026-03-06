@@ -14,7 +14,7 @@ Big thanks to the creators of Shulker Box Tooltip for making this mod a possibil
 
 ## Features:
 
-<img src="images/shulker box tooltip config.png" alt="Toolbox color configuration menu" width="80%" margin="auto"/>
+<img src="images/shulker box tooltip config colors.png" alt="Toolbox color configuration menu" width="80%" margin="auto"/>
 
 (Basically) everything that Shulker Box Tooltip gives you for Shulker Boxes except for toolboxes including GUI color customization.
 
@@ -23,6 +23,12 @@ Big thanks to the creators of Shulker Box Tooltip for making this mod a possibil
 <img src="images/empty toolbox.png" alt="Empty toolbox preview window" width="80%" margin="auto"/>
 
 Displays empty item stacks.
+
+<br>
+
+<img src="images/shulker%20box%20tooltip%20config%20preview.png" alt="Shulker Box Tooltip config window" width="80%" margin="auto"/>
+
+Ability to toggle off tooltips for other container types besides toolboxes to prevent incompatibilities with other mods such as [Easy Shulker Boxes](https://modrinth.com/mod/easy-shulker-boxes).
 
 ### Coming Soon:
 

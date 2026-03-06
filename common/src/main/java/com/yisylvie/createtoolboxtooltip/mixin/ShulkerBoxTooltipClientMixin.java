@@ -46,8 +46,6 @@ public abstract class ShulkerBoxTooltipClientMixin {
 			target = "Lnet/minecraft/network/chat/MutableComponent;append(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;",
             ordinal = 2
         )
-//		remap = false,
-//		require = 0
     )
     private static MutableComponent createtoolboxtooltip$changePreviewKeyHint(
             MutableComponent previewKeyHint,
@@ -55,9 +53,8 @@ public abstract class ShulkerBoxTooltipClientMixin {
             Operation<MutableComponent> previewKeyHintOperation,
             @Local(argsOnly = true) PreviewProvider provider,
             @Local(argsOnly = true) PreviewContext context) {
-        if (provider instanceof ToolboxPreviewProvider) {
-            ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider) provider;
-            if (toolboxProvider.isInventoryEmpty(context)
+        if (provider instanceof ToolboxPreviewProvider toolboxProvider) {
+			if (toolboxProvider.isInventoryEmpty(context)
                     && !ShulkerBoxTooltip.config.preview.swapModes) {
                 Component fullPreviewKey = ShulkerBoxTooltip
                         .config.controls.fullPreviewKey.get().getDisplayName();
@@ -85,15 +82,12 @@ public abstract class ShulkerBoxTooltipClientMixin {
             value = "HEAD"
         ),
         cancellable = true
-//		remap = false,
-//		require = 0
     )
     private static void createtoolboxtooltip$removePreviewKeyHint(
             PreviewContext context, PreviewProvider provider, boolean previewRequested,
             CallbackInfoReturnable<Component> cir) {
-        if (provider instanceof ToolboxPreviewProvider) {
-            ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider) provider;
-            if (toolboxProvider.isInventoryEmpty(context)
+        if (provider instanceof ToolboxPreviewProvider toolboxProvider) {
+			if (toolboxProvider.isInventoryEmpty(context)
                     && ShulkerBoxTooltipApi.getCurrentPreviewType(provider.isFullPreviewAvailable(context))
                         == PreviewType.FULL) {
                 cir.setReturnValue(null);
@@ -110,16 +104,13 @@ public abstract class ShulkerBoxTooltipClientMixin {
             value = "INVOKE",
             target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;"
         )
-//		remap = false,
-//		require = 0
     )
     private static String createtoolboxtooltip$changeContentHint(
             String contentHint,
             @Local(argsOnly = true) PreviewContext context,
             @Local(argsOnly = true) PreviewProvider provider) {
-        if (provider instanceof ToolboxPreviewProvider) {
-            ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider) provider;
-            if (toolboxProvider.isInventoryEmpty(context)) {
+        if (provider instanceof ToolboxPreviewProvider toolboxProvider) {
+			if (toolboxProvider.isInventoryEmpty(context)) {
                 return provider.getFullTooltipHintLangKey(context);
             }
         }
@@ -137,7 +128,6 @@ public abstract class ShulkerBoxTooltipClientMixin {
 			),
 			remap = false,
 			cancellable = true
-//			require = 0
 	)
 	private static void createtoolboxtooltip$previewTooltipAvailableWithToolboxes(
 			PreviewContext context,
