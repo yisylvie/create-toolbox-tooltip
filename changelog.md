@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update to Architectury for multi-loader support.
+- Update to Architectury for multiloader support.
 
 ## [1.0.1+1.20.1] — 2025-03-03
 
