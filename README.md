@@ -8,7 +8,7 @@ This addon mod shows a tooltip which displays the contents of Create toolboxes w
 
 <img src="images/compact_preview.png" alt="Compact Preview Window" width="80%" margin="auto"/> <img src="images/full_preview.png" alt="Full Preview Window" width="80%" margin="auto"/>
 
-This mod was made using the Shulker Box Tooltip API. You can edit its configurations under the Shulker Box Tooltip mod's config in Mod Menu (on Quilt/Fabric, you will need to have Mod Menu installed first). Check out their [Wiki](https://github.com/MisterPeModder/ShulkerBoxTooltip/wiki) and [Modrinth](https://modrinth.com/mod/shulkerboxtooltip) page for more info.
+This mod was made using the Shulker Box Tooltip API. You can edit its configurations under the Shulker Box Tooltip mod&rsquo;s config in Mod Menu (on Quilt/Fabric, you will need to have Mod Menu installed first). Check out their [Wiki](https://github.com/MisterPeModder/ShulkerBoxTooltip/wiki) and [Modrinth](https://modrinth.com/mod/shulkerboxtooltip) page for more info.
 
 Big thanks to the creators of Shulker Box Tooltip for making this mod a possibility!
 
@@ -30,10 +30,15 @@ Displays empty item stacks.
 
 Ability to toggle off tooltips for other container types besides toolboxes to prevent incompatibilities with other mods such as [Easy Shulker Boxes](https://modrinth.com/mod/easy-shulker-boxes).
 
+<br>
+
+<img src="images/shulker%20box%20tooltip%20config%20tooltip.png" alt="Shulker Box Tooltip config window" width="80%" margin="auto"/>
+
+Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes
+
 ### Coming Soon:
 
 -   Support for other versions of Minecraft
--   Ability to toggle on/off Create's default tooltip for toolboxes
 
 ## Dependencies:
 

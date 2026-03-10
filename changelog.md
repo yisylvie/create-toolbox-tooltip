@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Support for Minecraft v1.21.1.
-- Ability to toggle on/off Create's default tooltip for toolboxes.
+- Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
 
 ### Changed
 
@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Option in Shulker Box Tooltip's mod config to disable previews for other container types.
+- Option in Shulker Box Tooltip&rsquo;s mod config to disable previews for other container types.
 
 ### Fixed
 

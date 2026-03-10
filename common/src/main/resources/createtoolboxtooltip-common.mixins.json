@@ -9,6 +9,7 @@
     "PreviewCategoryMixin",
     "PreviewTooltipComponentMixin",
     "ShulkerBoxTooltipClientMixin",
+    "TooltipCategoryMixin",
     "VanillaPreviewRendererMixin"
   ],
   "injectors": {

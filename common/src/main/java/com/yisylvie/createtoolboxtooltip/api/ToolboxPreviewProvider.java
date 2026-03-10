@@ -31,9 +31,9 @@ import net.minecraft.world.level.block.Block;
  */
 public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 
-   // Idk what a loot table does so we're setting that to false
+   // Idk what a loot table does, but everywhere else sets it to true so we're doing that
    public ToolboxPreviewProvider() {
-      super(8, false);
+      super(8, true);
    }
 
 /**

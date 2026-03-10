@@ -1,5 +1,7 @@
 {
     "shulkerboxtooltip.colors.create.toolboxes": "Toolboxes",
     "text.autoconfig.shulkerboxtooltip.option.preview.createtoolboxtooltip$enableOnlyToolboxes": "Enable toolbox previews only",
-    "text.autoconfig.shulkerboxtooltip.option.preview.createtoolboxtooltip$enableOnlyToolboxes.tooltip": "Toggles every preview type besides toolboxes \nto prevent incompatibilities with other mods."
+    "text.autoconfig.shulkerboxtooltip.option.preview.createtoolboxtooltip$enableOnlyToolboxes.tooltip": "Toggles every preview type besides toolboxes \nto prevent incompatibilities with other mods.",
+    "text.autoconfig.shulkerboxtooltip.option.tooltip.createtoolboxtooltip$hideCreateTooltips": "Hide Create’s toolbox tooltips",
+    "text.autoconfig.shulkerboxtooltip.option.tooltip.createtoolboxtooltip$hideCreateTooltips.tooltip": "If on, hides Create’s default tooltip for toolboxes. \n(This does nothing if the Create Client Setting \n“Enable Tooltips” is off.)"
 }

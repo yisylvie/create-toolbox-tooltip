@@ -1,4 +1,7 @@
 {
-  "package": "com.yisylvie.createtoolboxtooltip.mixin",
-  "minVersion": "0.8"
+  "package": "com.yisylvie.createtoolboxtooltip.forge.mixin",
+  "minVersion": "0.8",
+  "client": [
+    "ClientEventsMixin"
+  ]
 }
