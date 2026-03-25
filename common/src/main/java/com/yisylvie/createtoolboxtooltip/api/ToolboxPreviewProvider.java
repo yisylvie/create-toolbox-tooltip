@@ -10,6 +10,7 @@ import com.misterpemodder.shulkerboxtooltip.api.color.ColorKey;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorRegistry;
 import com.misterpemodder.shulkerboxtooltip.api.provider.BlockEntityPreviewProvider;
 import com.misterpemodder.shulkerboxtooltip.impl.color.ColorRegistryImpl;
+import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
 import com.simibubi.create.content.equipment.toolbox.ToolboxInventory;
 
@@ -17,6 +18,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -42,8 +44,8 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
  * but if there are 0 stack compartments, we can still display in full preview mode
  */
    public boolean shouldDisplay(@Nonnull PreviewContext context) {
-      CompoundTag InventoryTag = context.stack().getTagElement("Inventory");
-      if (InventoryTag != null) {
+      ToolboxInventory inventory = context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
+      if (inventory != null) {
          return getItemCount(this.getCompartments(context)) > 0;
       }
       return false;
@@ -54,7 +56,8 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
  * It seems as though a toolbox loses its stackability when placed in the world
  */
    public boolean showTooltipHints(@Nonnull PreviewContext context) {
-      return context.stack().getTagElement("Inventory") != null;
+      ToolboxInventory inventory = context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
+      return inventory != null;
    }
 
    @Environment(EnvType.CLIENT)
@@ -95,37 +98,19 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
    public List<ItemStack> getInventory(@Nonnull PreviewContext context) {
       int invMaxSize = this.getInventoryMaxSize(context);
       List<ItemStack> inv = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
-      CompoundTag InventoryTag = context.stack().getTagElement("Inventory");
+      ToolboxInventory inventory = context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
 
-      if (InventoryTag != null && InventoryTag.contains("Items", 9)) {
-         // I have no idea why the getList() method is not working, but this seems to be
-         ListTag itemList = (ListTag)InventoryTag.get("Items");
-
-         if (itemList != null) {
-            for (int compartment = 0; compartment < invMaxSize; compartment++) {
-               int baseIndex = compartment * ToolboxInventory.STACKS_PER_COMPARTMENT;
-               ItemStack s = ItemStack.EMPTY;
-               int count = 0;
-               for(int i = 0; i < itemList.size(); ++i) {
-                  CompoundTag itemTag = itemList.getCompound(i);
-                  if (itemTag.contains("Slot", 99)) {
-                     if (itemTag.getInt("Slot") == baseIndex) {
-                        s = ItemStack.of(itemTag);
-                        count = s.getCount();
-                     } else if(itemTag.getInt("Slot") > baseIndex
-                                    && itemTag.getInt("Slot") < baseIndex + 4) {
-                        count += ItemStack.of(itemTag).getCount();
-                     }
-                  }
-               }
-
-               if (!s.isEmpty()) {
-                  s.setCount(count);
-                  inv.set(compartment, s);
-               }
-            }
-         }
-      }
+      // if (inventory != null) {
+      //    for (int compartment = 0; compartment < invMaxSize; compartment++) {
+      //       // int baseIndex = compartment * ToolboxInventory.STACKS_PER_COMPARTMENT;
+      //       ItemStack s = ItemStack.EMPTY;
+      //       int count = 0;
+      //       if (!s.isEmpty()) {
+      //          s.setCount(count);
+      //          inv.set(compartment, s);
+      //       }
+      //    }
+      // }
       return inv;
    }
 
@@ -136,16 +121,16 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
    public List<ItemStack> getCompartments(PreviewContext context) {
       int invMaxSize = this.getInventoryMaxSize(context);
       List<ItemStack> comp = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
-      CompoundTag InventoryTag = context.stack().getTagElement("Inventory");
+      ToolboxInventory inventory = context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
 
-      if (InventoryTag != null && InventoryTag.contains("Compartments", 9)) {
-         ListTag compartmentsList = InventoryTag.getList("Compartments", 10);
-		  for (int i = 0; i < compartmentsList.size(); ++i) {
-			  CompoundTag compartmentsTag = compartmentsList.getCompound(i);
-			  ItemStack s = ItemStack.of(compartmentsTag);
-			  comp.set(i, s);
-		  }
-	  }
+      // if (inventory != null && inventory.contains("Compartments", 9)) {
+      //    ListTag compartmentsList = inventory.getList("Compartments", 10);
+		//   for (int i = 0; i < compartmentsList.size(); ++i) {
+		// 	  CompoundTag compartmentsTag = compartmentsList.getCompound(i);
+		// 	  ItemStack s = ItemStack.of(compartmentsTag);
+		// 	  comp.set(i, s);
+		//   }
+	  // }
       return comp;
    }
 
