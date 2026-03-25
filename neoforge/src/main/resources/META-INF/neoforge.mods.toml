@@ -26,3 +26,17 @@ mandatory = true
 versionRange = "${minecraft_version}"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.createtoolboxtooltip]]
+modId = "create"
+mandatory = true
+versionRange = "[0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.createtoolboxtooltip]]
+modId = "shulkerboxtooltip"
+mandatory = true
+versionRange = "${shulkerboxtooltip_version}"
+ordering = "NONE"
+side = "BOTH"
