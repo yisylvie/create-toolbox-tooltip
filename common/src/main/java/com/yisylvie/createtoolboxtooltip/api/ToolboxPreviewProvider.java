@@ -15,6 +15,7 @@ import com.simibubi.create.content.equipment.toolbox.ToolboxInventory;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -60,7 +61,7 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
    public ColorKey getWindowColorKey(@Nonnull PreviewContext context) {
       ColorRegistryImpl colorRegistry = ColorRegistryImpl.INSTANCE;
       ColorRegistry.Category category = colorRegistry.category(
-                     new ResourceLocation("create", "toolboxes"));
+			  ResourceLocation.fromNamespaceAndPath("create", "toolboxes"));
 
       DyeColor dye = ((ToolboxBlock) Block.byItem(context.stack().getItem())).getColor();
       if (dye == null)
