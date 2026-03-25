@@ -17,6 +17,6 @@ public class createToolboxTooltip implements ModInitializer {
     }
 
     public static ResourceLocation id(String path) {
-        return new ResourceLocation(ID, path);
+		return ResourceLocation.fromNamespaceAndPath(ID, path);
     }
 }
