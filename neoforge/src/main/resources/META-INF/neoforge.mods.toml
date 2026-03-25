@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[${forge_version},)"
+loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/yisylvie/create-toolbox-tooltip/issues"
 displayURL = "https://modrinth.com/mod/create-toolbox-tooltip/"
 license = "MIT"
@@ -14,9 +14,9 @@ logoFile = "icon.png"
 displayURL = "https://modrinth.com/mod/create-toolbox-tooltip"
 
 [[dependencies.createtoolboxtooltip]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[${forge_version},)"
+versionRange = "[21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -24,19 +24,5 @@ side = "BOTH"
 modId = "minecraft"
 mandatory = true
 versionRange = "${minecraft_version}"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.createtoolboxtooltip]]
-modId = "create"
-mandatory = true
-versionRange = "[0,)"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.createtoolboxtooltip]]
-modId = "shulkerboxtooltip"
-mandatory = true
-versionRange = "${shulkerboxtooltip_version}"
 ordering = "NONE"
 side = "BOTH"

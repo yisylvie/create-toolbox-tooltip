@@ -1,16 +1,9 @@
 {
   "required": true,
   "package": "com.yisylvie.createtoolboxtooltip.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "mixins": [
-    "BasePreviewRendererMixin",
-    "ModPreviewRendererMixin",
-    "PreviewCategoryMixin",
-    "PreviewTooltipComponentMixin",
-    "ShulkerBoxTooltipClientMixin",
-    "TooltipCategoryMixin",
-    "VanillaPreviewRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

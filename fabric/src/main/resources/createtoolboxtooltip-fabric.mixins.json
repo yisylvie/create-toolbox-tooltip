@@ -1,7 +1,0 @@
-{
-  "package": "com.yisylvie.createtoolboxtooltip.fabric.mixin",
-  "minVersion": "0.8",
-  "client": [
-    "ClientEventsMixin"
-  ]
-}
