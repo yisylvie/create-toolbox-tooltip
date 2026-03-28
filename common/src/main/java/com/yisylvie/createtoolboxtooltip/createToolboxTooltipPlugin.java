@@ -69,7 +69,8 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
         TOOLBOX_ITEMS = new Item[DyeColor.values().length];
         int i = 0;
         while(toolboxIterator.hasNext()) {
-            TOOLBOX_ITEMS[i] = toolboxIterator.next().asItem();
+            // TOOLBOX_ITEMS[i] = toolboxIterator.next().get().asItem();
+			toolboxIterator.next();
             i++;
         }
     }

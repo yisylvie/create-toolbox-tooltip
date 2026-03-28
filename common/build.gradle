@@ -20,7 +20,12 @@ dependencies {
 	// All dependencies except Flywheel and Registrate are NOT safe to use!
 	// Flywheel and Registrate must also be used carefully due to differences across loaders.
 	modCompileOnly("com.simibubi.create:create-${minecraft_version}:${create_neo_version}:slim") { transitive = false }
+	implementation("com.tterrag.registrate:Registrate:${registrate_neo_version}")
 
 	// Shulker Box Tooltip
     modImplementation("com.misterpemodder:shulkerboxtooltip-common:$shulkerboxtooltip_version") { transitive false }
+
+	// Nullable annotations.
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
+	implementation 'org.jetbrains:annotations:23.0.0'
 }

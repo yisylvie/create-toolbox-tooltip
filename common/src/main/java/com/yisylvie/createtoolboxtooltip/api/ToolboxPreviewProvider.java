@@ -10,12 +10,18 @@ import com.misterpemodder.shulkerboxtooltip.api.color.ColorKey;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorRegistry;
 import com.misterpemodder.shulkerboxtooltip.api.provider.BlockEntityPreviewProvider;
 import com.misterpemodder.shulkerboxtooltip.impl.color.ColorRegistryImpl;
+
 import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
 import com.simibubi.create.content.equipment.toolbox.ToolboxInventory;
 
+import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentType;
@@ -99,7 +105,7 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
       int invMaxSize = this.getInventoryMaxSize(context);
       List<ItemStack> inv = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
       ToolboxInventory inventory = context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
-
+	  createToolboxTooltip.LOGGER.info("broski", inventory);
       // if (inventory != null) {
       //    for (int compartment = 0; compartment < invMaxSize; compartment++) {
       //       // int baseIndex = compartment * ToolboxInventory.STACKS_PER_COMPARTMENT;
@@ -122,6 +128,7 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
       int invMaxSize = this.getInventoryMaxSize(context);
       List<ItemStack> comp = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
       ToolboxInventory inventory = context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
+
 
       // if (inventory != null && inventory.contains("Compartments", 9)) {
       //    ListTag compartmentsList = inventory.getList("Compartments", 10);
