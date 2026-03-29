@@ -15,9 +15,6 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
 import com.simibubi.create.AllBlocks;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -36,7 +33,6 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
      * Has to use a copy of the shulkers' color keys otherwise they get linked to the shulker colors
      */
     @Override
-    @Environment(EnvType.CLIENT)
     public void registerColors(@Nonnull ColorRegistry registry) {
         registry.category(toolboxResourceLocation)
             .register(ColorKey.copyOf(ColorKey.WHITE_SHULKER_BOX), "white_toolbox", blockName("white_toolbox"))
@@ -69,8 +65,7 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
         TOOLBOX_ITEMS = new Item[DyeColor.values().length];
         int i = 0;
         while(toolboxIterator.hasNext()) {
-            // TOOLBOX_ITEMS[i] = toolboxIterator.next().get().asItem();
-			toolboxIterator.next();
+            TOOLBOX_ITEMS[i] = toolboxIterator.next().asItem();
             i++;
         }
     }
