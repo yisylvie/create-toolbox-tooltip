@@ -1,7 +1,6 @@
 package com.yisylvie.createtoolboxtooltip.api;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -16,30 +15,27 @@ import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
 import com.simibubi.create.content.equipment.toolbox.ToolboxInventory;
 
-import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
-
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 
 /**
- * Create uses the "Inventory" tag instead of the "BlockEntity"
- * tag to store data about toolbox contents, so we must replace every
- * instance of the "BlockEntity" tag with the "Inventory" tag.
+ * Create uses the TOOLBOX_INVENTORY data component
+ * instead of the "CONTAINER" component to store
+ * data about toolbox contents, so we must replace
+ * every instance of CONTAINER with TOOLBOX_INVENTORY.
  */
 public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 
-    // Idk what a loot table does, but everywhere else sets it to true so we're doing that
+    // Idk what a loot table does, but everywhere
+    // else sets it to true so we're doing that
     public ToolboxPreviewProvider() {
         super(8, true);
     }
@@ -57,11 +53,13 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
     }
 
     /**
-     * If the toolbox is stackable, the Inventory tag doesn't exist (and thus we will not show tooltips)
-     * It seems as though a toolbox loses its stackability when placed in the world
+     * If the toolbox is stackable, the TOOLBOX_INVENTORY
+     * component doesn't exist (and thus we will not show tooltips)
+     * It seems as though a toolbox loses its stackability
+     * when placed in the world
      */
     public boolean showTooltipHints(@Nonnull PreviewContext context) {
-        return context.stack().get(AllDataComponents.TOOLBOX_INVENTORY) != null;
+        return context.stack().has(AllDataComponents.TOOLBOX_INVENTORY);
     }
 
     public ColorKey getWindowColorKey(@Nonnull PreviewContext context) {
@@ -101,7 +99,8 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
     public List<ItemStack> getInventory(@Nonnull PreviewContext context) {
         int invMaxSize = this.getInventoryMaxSize(context);
         List<ItemStack> inv = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
-        ToolboxInventory toolboxInv = context.stack().getComponents().get(AllDataComponents.TOOLBOX_INVENTORY);
+        ToolboxInventory toolboxInv = context.stack()
+                .getComponents().get(AllDataComponents.TOOLBOX_INVENTORY);
         HolderLookup.Provider registry = context.registryLookup();
         if (toolboxInv != null && registry != null) {
             CompoundTag InventoryTag = toolboxInv.serializeNBT(registry);
