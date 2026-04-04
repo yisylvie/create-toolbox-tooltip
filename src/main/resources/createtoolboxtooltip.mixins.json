@@ -4,6 +4,10 @@
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "mixins": [
+    "BasePreviewRendererMixin",
+    "ModPreviewRendererMixin",
+    "VanillaPreviewRendererMixin",
+    "ShulkerBoxTooltipClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

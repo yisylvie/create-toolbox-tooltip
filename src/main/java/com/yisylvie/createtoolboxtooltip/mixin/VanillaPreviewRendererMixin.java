@@ -1,6 +1,8 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
-import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
+import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
+import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
+import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,9 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
 import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
 import com.misterpemodder.shulkerboxtooltip.impl.renderer.VanillaPreviewRenderer;
+import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(VanillaPreviewRenderer.class)
 public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
@@ -40,4 +45,29 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
             }
         }
     }
+
+	/**
+	 * We want tooltip hints but not the inventory to render when the preview
+	 * type is compact and isInventoryEmpty(). Doing so causes there to
+	 * be a silly little gap where the inventory would have been displayed.
+	 * In this instance, we must override getHeight() to close that gap.
+	 */
+	@Inject(
+			method = "getHeight",
+			at = @At(
+					value = "RETURN"
+			),
+			cancellable = true,
+			remap = false
+	)
+	private void createtoolboxtooltip$changeHeight(CallbackInfoReturnable<Integer> cir) {
+		if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
+			if (ShulkerBoxTooltip.config.preview.position == Configuration.PreviewPosition.INSIDE
+					&& ShulkerBoxTooltipApi.getCurrentPreviewType(this.provider.isFullPreviewAvailable(this.previewContext))
+					== PreviewType.COMPACT
+					&& toolboxProvider.isInventoryEmpty(this.previewContext)) {
+				cir.setReturnValue(0);
+			}
+		}
+	}
 }

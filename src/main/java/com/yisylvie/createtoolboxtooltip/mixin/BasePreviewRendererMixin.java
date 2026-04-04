@@ -85,7 +85,7 @@ public abstract class BasePreviewRendererMixin {
 					if (this.items.get(1).get() == stack) {
 						if (this.items.get(0).get().getCount() >= 1000 && stack.getCount() >= 1000 && !shortItemCount) {
 							context.renderItem(stack, x, y);
-							context.renderItemDecorations(textRenderer, stack, x + this.slotWidth / 2, y, String.valueOf(stack.getCount()));
+							context.renderItemDecorations(textRenderer, stack, x + (int)(this.slotWidth * .45), y, String.valueOf(stack.getCount()));
 							ci.cancel();
 						}
 					}
