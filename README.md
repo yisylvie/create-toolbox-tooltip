@@ -34,16 +34,12 @@ Ability to toggle off tooltips for other container types besides toolboxes to pr
 
 <img src="images/shulker%20box%20tooltip%20config%20tooltip.png" alt="Shulker Box Tooltip config window" width="80%" margin="auto"/>
 
-Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes
-
-### Coming Soon:
-
--   Support for other versions of Minecraft
+Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
 
 ## Dependencies:
 
--   [Create](https://modrinth.com/mod/create-fabric/versions?g=1.20.1) (and all its dependencies)
--   [Shulker Box Tooltip v4.0.4](https://modrinth.com/mod/shulkerboxtooltip/versions?g=1.20.1) (and all its dependencies)
+-   [Create](https://modrinth.com/mod/create/versions?g=1.21.1&g=1.20.1) (and all its dependencies)
+-   Shulker Box Tooltip [v4.0.4+1.20.1](https://modrinth.com/mod/shulkerboxtooltip/versions?g=1.20.1) or [v5.1.9+1.21.1](https://modrinth.com/mod/shulkerboxtooltip/versions?g=1.21.1) (and all its dependencies)
 
 ### Recommended:
 

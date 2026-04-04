@@ -1,39 +1,27 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
-import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
-import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
-import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
-import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
-import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
-import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
-import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
-import com.misterpemodder.shulkerboxtooltip.impl.renderer.ModPreviewRenderer;
-
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
+import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
+import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
+import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
+import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
+import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
+import com.misterpemodder.shulkerboxtooltip.impl.renderer.ModPreviewRenderer;
+
+@SuppressWarnings("UnstableApiUsage")
 @Mixin(ModPreviewRenderer.class)
 public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
     protected ModPreviewRendererMixin(int slotWidth, int slotHeight, int slotXOffset, int slotYOffset) {
         super(slotWidth, slotHeight, slotXOffset, slotYOffset);
     }
-
-	// @Final
-	// @Shadow(remap = false)
-	// private PreviewProvider provider;
-	//
-	// @Final
-	// @Shadow(remap = false)
-	// private PreviewContext previewContext;
 
 	/**
      * Mod default theme doesn't display if inventory is empty,
@@ -49,9 +37,8 @@ public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
         )
     )
     private boolean createtoolboxtooltip$drawIfEmpty(boolean isEmpty) {
-        if (this.provider instanceof ToolboxPreviewProvider) {
+        if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
             if(this.previewType == PreviewType.FULL) {
-                ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider)(this.provider);
                 // We must (double) negate since isEmpty is negated in original if statement
                 return !toolboxProvider.shouldDisplay(this.previewContext);
             }

@@ -7,14 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4+1.21.1] — 2026-04-03
+
 ### Added
 
 - Support for Minecraft v1.21.1.
 - Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
 
+### Fixed
+
+- Lock keybinds now work and display properly for empty toolboxes.
+
 ### Changed
 
-- Shulker Box Tooltip dependency to v5.1.8+1.21.1.
+- Shulker Box Tooltip dependency to v5.1.9+1.21.1.
+
+### Removed
+
+- Architectury dependency.
+- Fabric, Quilt, and Forge support.
+
+## [1.0.4+1.20.1] — 2026-04-03
+
+### Added
+
+- Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
+
+### Fixed
+
+- Lock keybinds now work and display properly for empty toolboxes.
 
 ## [1.0.3+1.20.1] — 2026-03-06
 

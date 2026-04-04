@@ -1,24 +1,24 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
+import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
+
 import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
 import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
+import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
 import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
+import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
+import com.misterpemodder.shulkerboxtooltip.impl.renderer.VanillaPreviewRenderer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
-import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
-import com.misterpemodder.shulkerboxtooltip.impl.renderer.VanillaPreviewRenderer;
-import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
+@SuppressWarnings("UnstableApiUsage")
 @Mixin(VanillaPreviewRenderer.class)
 public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
     protected VanillaPreviewRendererMixin(int slotWidth, int slotHeight, int slotXOffset, int slotYOffset) {
@@ -37,9 +37,8 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
     private void createtoolboxtooltip$dontDrawIfEmpty(
             int x, int y, GuiGraphics context, Font textRenderer,
             int mouseX, int mouseY, CallbackInfo ci) {
-        if (this.provider instanceof ToolboxPreviewProvider) {
-            ToolboxPreviewProvider toolboxProvider = (ToolboxPreviewProvider)this.provider;
-            if(this.previewType == PreviewType.COMPACT
+        if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
+			if(this.previewType == PreviewType.COMPACT
                     && ToolboxPreviewProvider.getItemCount(toolboxProvider.getInventory(this.previewContext)) == 0) {
                 ci.cancel();
             }

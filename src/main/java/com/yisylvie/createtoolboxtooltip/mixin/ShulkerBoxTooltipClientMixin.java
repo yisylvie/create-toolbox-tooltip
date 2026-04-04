@@ -1,8 +1,10 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
-// import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
-import com.misterpemodder.shulkerboxtooltip.impl.config.ClientConfiguration;
+import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
+
+import java.util.Collections;
+import java.util.List;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,23 +21,19 @@ import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
 import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
 import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
 import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
+import com.misterpemodder.shulkerboxtooltip.impl.config.ClientConfiguration;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-
 
 /**
  * If an inventory is empty, but not the compartments,
  * we do not display anything in compact mode, but we do display
  * in full mode. Here, we change the keybind tooltips accordingly.
  */
+@SuppressWarnings("UnstableApiUsage")
 @Mixin(ShulkerBoxTooltipClient.class)
 public abstract class ShulkerBoxTooltipClientMixin {
-
-	// @Shadow
-	// public static ClientConfiguration getConfig() {
-	// 	return null;
-	// }
 
 	/**
 	 * We never want to display an empty inventory with
@@ -54,11 +52,11 @@ public abstract class ShulkerBoxTooltipClientMixin {
 			PreviewContext context,
 		   	CallbackInfoReturnable<Boolean> cir,
 			@Local(name = "provider") PreviewProvider provider) {
-	    if (provider instanceof ToolboxPreviewProvider) {
-			if (provider.shouldDisplay(context)
-					&& ((ToolboxPreviewProvider) provider).isInventoryEmpty(context)
+	    if (provider instanceof ToolboxPreviewProvider toolboxProvider) {
+			if (toolboxProvider.shouldDisplay(context)
+					&& toolboxProvider.isInventoryEmpty(context)
 					&& ShulkerBoxTooltipApi.getCurrentPreviewType(
-					provider.isFullPreviewAvailable(context)) == PreviewType.COMPACT
+					toolboxProvider.isFullPreviewAvailable(context)) == PreviewType.COMPACT
 			) {
 				cir.setReturnValue(false);
 			}
@@ -150,8 +148,8 @@ public abstract class ShulkerBoxTooltipClientMixin {
     }
 
 	/**
-	 * Since there is no compact mode when isInventoryEmpty, we never
-	 * want to display a lock key tooltip when the preview type is compact
+	 * We never want to display a lock key tooltip when
+	 * the preview type is compact and isInventoryEmpty
 	 */
 	@Inject(
 			method = "getLockKeyTooltipHint",
@@ -171,45 +169,46 @@ public abstract class ShulkerBoxTooltipClientMixin {
 
 	/**
 	 * We don't want to display keybind tooltips for other container
-	 * types when "enable only toolboxes" is set to true
+	 * types when createtoolboxtooltip$enableOnlyToolBoxes is set to true
 	 */
-	// @Inject(
-	// 		method = "getTooltipHints",
-	// 		at = @At(
-	// 			value = "HEAD"
-	// 		),
-	// 		remap = false,
-	// 		cancellable = true
-	// )
-	// private static void createtoolboxtooltip$previewTooltipAvailableWithToolboxes(
-	// 		PreviewContext context,
-	// 		PreviewProvider provider,
-	// 		CallbackInfoReturnable<List<Component>> cir) {
-	// 	ClientConfiguration config = ShulkerBoxTooltipClient.getConfig();
-	// 	if (((PreviewCategoryAccess) config.preview).createtoolboxtooltip$getEnableOnlyToolboxes()
-	// 			&& !(provider instanceof ToolboxPreviewProvider)) {
-	// 		cir.setReturnValue(Collections.emptyList());
-	// 	}
-	// }
+	@Inject(
+			method = "getTooltipHints",
+			at = @At(
+				value = "HEAD"
+			),
+			remap = false,
+			cancellable = true
+	)
+	private static void createtoolboxtooltip$previewTooltipAvailableWithToolboxes(
+			PreviewContext context,
+			PreviewProvider provider,
+			CallbackInfoReturnable<List<Component>> cir) {
+		ClientConfiguration config = ShulkerBoxTooltipClient.getConfig();
+		if (((PreviewCategoryAccess) config.preview).createtoolboxtooltip$getEnableOnlyToolboxes()
+				&& !(provider instanceof ToolboxPreviewProvider)) {
+			cir.setReturnValue(Collections.emptyList());
+		}
+	}
 
 	/**
 	 * We want to turn off the Shulker Box tooltips for everything but
 	 * toolboxes if createtoolboxtooltip$enableOnlyToolBoxes is set to true
 	 */
-	// @Inject(
-	// 		method = "isPreviewAvailable",
-	// 		at = @At(
-	// 				value = "HEAD"
-	// 		),
-	// 		cancellable = true,
-	// 		remap = false
-	// )
-	// private static void createtoolboxtooltip$previewAvailableWithToolboxes(
-	// 		PreviewContext context, CallbackInfoReturnable<Boolean> cir) {
-	// 	PreviewProvider provider = ShulkerBoxTooltipApi.getPreviewProviderForStack(context.stack());
-	// 	if (((PreviewCategoryAccess) config.preview).createtoolboxtooltip$getEnableOnlyToolboxes()
-	// 			&& !(provider instanceof ToolboxPreviewProvider)) {
-	// 		cir.setReturnValue(false);
-	// 	}
-	// }
+	@Inject(
+			method = "isPreviewAvailable",
+			at = @At(
+					value = "HEAD"
+			),
+			cancellable = true,
+			remap = false
+	)
+	private static void createtoolboxtooltip$previewAvailableWithToolboxes(
+			PreviewContext context, CallbackInfoReturnable<Boolean> cir) {
+		ClientConfiguration config = ShulkerBoxTooltipClient.getConfig();
+		PreviewProvider provider = ShulkerBoxTooltipApi.getPreviewProviderForStack(context.stack());
+		if (((PreviewCategoryAccess)config.preview).createtoolboxtooltip$getEnableOnlyToolboxes()
+				&& !(provider instanceof ToolboxPreviewProvider)) {
+			cir.setReturnValue(false);
+		}
+	}
 }

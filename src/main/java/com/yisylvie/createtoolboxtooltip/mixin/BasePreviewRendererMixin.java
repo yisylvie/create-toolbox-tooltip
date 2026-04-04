@@ -25,6 +25,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
+@SuppressWarnings("UnstableApiUsage")
 @Mixin(BasePreviewRenderer.class)
 public abstract class BasePreviewRendererMixin {
 
@@ -52,7 +53,7 @@ public abstract class BasePreviewRendererMixin {
 	 * and display item decorations for items with a stack size of 1.
 
 	 *  If there are two items with a (compacted) stack >= 1000,
-	 *  shifts the second tooltip over a tiny bit so they won't overlap
+	 *  shifts the second stack tooltip over a tiny bit so they won't overlap
 	 */
 	@Inject(
 		method = "drawItem",
@@ -83,7 +84,7 @@ public abstract class BasePreviewRendererMixin {
 			} else if (this.previewType == PreviewType.COMPACT) {
 				if (this.items.size() > 1) {
 					if (this.items.get(1).get() == stack) {
-						if (this.items.get(0).get().getCount() >= 1000 && stack.getCount() >= 1000 && !shortItemCount) {
+						if (this.items.getFirst().get().getCount() >= 1000 && stack.getCount() >= 1000 && !shortItemCount) {
 							context.renderItem(stack, x, y);
 							context.renderItemDecorations(textRenderer, stack, x + (int)(this.slotWidth * .45), y, String.valueOf(stack.getCount()));
 							ci.cancel();

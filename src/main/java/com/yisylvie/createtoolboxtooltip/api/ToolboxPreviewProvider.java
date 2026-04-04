@@ -17,7 +17,6 @@ import com.simibubi.create.content.equipment.toolbox.ToolboxInventory;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -62,7 +61,8 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
         return context.stack().has(AllDataComponents.TOOLBOX_INVENTORY);
     }
 
-    public ColorKey getWindowColorKey(@Nonnull PreviewContext context) {
+    @SuppressWarnings("UnstableApiUsage")
+	public ColorKey getWindowColorKey(@Nonnull PreviewContext context) {
         ColorRegistryImpl colorRegistry = ColorRegistryImpl.INSTANCE;
         ColorRegistry.Category category = colorRegistry.category(
                 ResourceLocation.fromNamespaceAndPath("create", "toolboxes"));

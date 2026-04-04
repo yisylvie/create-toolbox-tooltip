@@ -1,17 +1,16 @@
 modLoader = "javafml"
 loaderVersion = "${loader_version_range}"
-issueTrackerURL = "https://github.com/yisylvie/create-toolbox-tooltip/issues"
-displayURL = "https://modrinth.com/mod/create-toolbox-tooltip/"
+issueTrackerURL = "${mod_issues_url}"
 license = "${mod_license}"
 
 [[mods]]
 modId = "${mod_id}"
 version = "${version}"
 displayName = "${mod_name}"
-authors = "Sylvie Lee"
-description = "What's in my toolbox?"
-logoFile = "../icon.png"
-displayURL = "https://modrinth.com/mod/create-toolbox-tooltip"
+authors = "${mod_authors}"
+description = "${mod_description}"
+logoFile = "icon.png"
+displayURL = "${mod_url}"
 
 [[dependencies."${mod_id}"]]
 modId = "neoforge"

@@ -29,7 +29,7 @@ public class createToolboxTooltipPlugin implements ShulkerBoxTooltipApi {
     }
 
     /**
-     * Gives our toolboxes their own options for colors in the Mod Menu config
+     * Gives our toolboxes their own options for colors in the config
      * Has to use a copy of the shulkers' color keys otherwise they get linked to the shulker colors
      */
     @Override

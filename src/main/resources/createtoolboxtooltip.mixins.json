@@ -5,9 +5,12 @@
   "minVersion": "0.8",
   "mixins": [
     "BasePreviewRendererMixin",
+    "ClientEventsMixin",
     "ModPreviewRendererMixin",
-    "VanillaPreviewRendererMixin",
-    "ShulkerBoxTooltipClientMixin"
+    "PreviewCategoryMixin",
+    "ShulkerBoxTooltipClientMixin",
+    "TooltipCategoryMixin",
+    "VanillaPreviewRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
