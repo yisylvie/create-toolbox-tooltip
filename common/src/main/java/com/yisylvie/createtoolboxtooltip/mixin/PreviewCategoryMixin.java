@@ -10,19 +10,19 @@ import com.misterpemodder.shulkerboxtooltip.impl.config.annotation.AutoTooltip;
 
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
-
+@SuppressWarnings("UnstableApiUsage")
 @Mixin(Configuration.PreviewCategory.class)
- public abstract class PreviewCategoryMixin implements PreviewCategoryAccess {
+public abstract class PreviewCategoryMixin implements PreviewCategoryAccess {
 
 	/**
 	 * adds a new option to Shulker Box Tooltip's config
- 	 */
+	 */
 	@Unique
 	@AutoTooltip
 	@Comment("""
 		Turn off every preview type besides toolboxes
 		to prevent incompatibilities with other mods""")
-    public boolean createtoolboxtooltip$enableOnlyToolboxes = false;
+	public boolean createtoolboxtooltip$enableOnlyToolboxes = false;
 
 	@Unique
 	public boolean createtoolboxtooltip$getEnableOnlyToolboxes() {

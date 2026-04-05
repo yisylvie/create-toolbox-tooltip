@@ -7,22 +7,23 @@ import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
 import com.simibubi.create.foundation.events.ClientEvents;
 
-import net.minecraft.world.item.BlockItem;
-
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+
+import net.minecraft.world.item.BlockItem;
+
 @Mixin(ClientEvents.class)
 public abstract class ClientEventsMixin {
 
-    /**
-     * disables the default Create toolbox tooltip if
+	/**
+	 * disables the default Create toolbox tooltip if
 	 * the enableCreateTooltips flag is set to false
 	 */
+	@SuppressWarnings("UnstableApiUsage")
 	@Inject(
 			method = "addToItemTooltip",
 			at = @At(

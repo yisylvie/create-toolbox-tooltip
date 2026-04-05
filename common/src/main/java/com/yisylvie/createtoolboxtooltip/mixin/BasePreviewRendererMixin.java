@@ -25,6 +25,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
+@SuppressWarnings("UnstableApiUsage")
 @Mixin(BasePreviewRenderer.class)
 public abstract class BasePreviewRendererMixin {
 
@@ -68,24 +69,31 @@ public abstract class BasePreviewRendererMixin {
 			CallbackInfo ci) {
 		if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
 			if (this.previewType == PreviewType.FULL) {
-				ItemStack realStack = toolboxProvider.getInventory(this.previewContext).get(slot);
-				ItemStack compartmentStack = toolboxProvider.getCompartments(this.previewContext).get(slot);
+				ItemStack realStack = toolboxProvider
+						.getInventory(this.previewContext).get(slot);
+				ItemStack compartmentStack = toolboxProvider
+						.getCompartments(this.previewContext).get(slot);
 				// the mergedItemStack does funky things, so we must regrab the (unmerged) stack
 				if (realStack.isEmpty() && !compartmentStack.isEmpty()) {
 					context.renderItem(compartmentStack, x, y);
-					context.renderItemDecorations(textRenderer, compartmentStack, x, y, "0");
+					context.renderItemDecorations(
+							textRenderer, compartmentStack, x, y, "0");
 					ci.cancel();
 				} else if (realStack.getCount() == 1) {
 					context.renderItem(compartmentStack, x, y);
-					context.renderItemDecorations(textRenderer, compartmentStack, x, y, "1");
+					context.renderItemDecorations(
+							textRenderer, compartmentStack, x, y, "1");
 					ci.cancel();
 				}
 			} else if (this.previewType == PreviewType.COMPACT) {
 				if (this.items.size() > 1) {
 					if (this.items.get(1).get() == stack) {
-						if (this.items.get(0).get().getCount() >= 1000 && stack.getCount() >= 1000 && !shortItemCount) {
+						if (this.items.get(0).get().getCount() >= 1000
+								&& stack.getCount() >= 1000 && !shortItemCount) {
 							context.renderItem(stack, x, y);
-							context.renderItemDecorations(textRenderer, stack, x + this.slotWidth / 2, y, String.valueOf(stack.getCount()));
+							context.renderItemDecorations(
+									textRenderer, stack, x + (int)(this.slotWidth * .45),
+									y, String.valueOf(stack.getCount()));
 							ci.cancel();
 						}
 					}
@@ -103,14 +111,16 @@ public abstract class BasePreviewRendererMixin {
 	 * @return our new compartment iterator
 	 */
 	@ModifyVariable(
-		method = "drawItems",
-		at = @At("STORE"),
-		ordinal = 0
+			method = "drawItems",
+			at = @At("STORE"),
+			ordinal = 0
 	)
 	private Iterator<MergedItemStack> createtoolboxtooltip$changeDrawItemsIterator(
 			Iterator<MergedItemStack> itemsIterator) {
-		if (this.provider instanceof ToolboxPreviewProvider && !itemsIterator.hasNext()) {
-			return createtoolboxtooltip$getCompartmentIterator(provider, previewContext, config);
+		if (this.provider instanceof ToolboxPreviewProvider
+				&& !itemsIterator.hasNext()) {
+			return createtoolboxtooltip$getCompartmentIterator(
+					provider, previewContext, config);
 		}
 		return itemsIterator;
 	}
@@ -124,14 +134,15 @@ public abstract class BasePreviewRendererMixin {
 	 * @return our new compartment iterator
 	 */
 	@ModifyVariable(
-		method = "getStackAt",
-		at = @At("STORE"),
-		ordinal = 0
+			method = "getStackAt",
+			at = @At("STORE"),
+			ordinal = 0
 	)
 	private Iterator<MergedItemStack> createtoolboxtooltip$changeGetStackAtIterator(
 			Iterator<MergedItemStack> itemsIterator) {
 		if (this.provider instanceof ToolboxPreviewProvider) {
-			return createtoolboxtooltip$getCompartmentIterator(provider, previewContext, config);
+			return createtoolboxtooltip$getCompartmentIterator(
+					provider, previewContext, config);
 		}
 		return itemsIterator;
 	}

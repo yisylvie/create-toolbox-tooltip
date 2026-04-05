@@ -1,8 +1,9 @@
 package com.yisylvie.createtoolboxtooltip.forge;
 
-import com.yisylvie.createtoolboxtooltip.createToolboxTooltipPlugin;
-import com.misterpemodder.shulkerboxtooltip.api.forge.ShulkerBoxTooltipPlugin;
 import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
+import com.yisylvie.createtoolboxtooltip.createToolboxTooltipPlugin;
+
+import com.misterpemodder.shulkerboxtooltip.api.forge.ShulkerBoxTooltipPlugin;
 
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;

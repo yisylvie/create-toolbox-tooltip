@@ -61,12 +61,19 @@ dependencies {
 processResources {
     // set up properties for filling into metadata
     Map<String, Object> properties = [
-            "version": version,
+            "version": mod_version,
             "forge_version": forge_version.split("\\.")[0], // only specify major version of forge
             "minecraft_version": minecraft_version,
             "flywheel_version": flywheel_forge_version,
     		"shulkerboxtooltip_version": shulkerboxtooltip_version,
-            "create_version": create_forge_version.split("-")[0] // cut off build number
+            "create_version": create_forge_version.split("-")[0], // cut off build number
+			mod_id: mod_id,
+			mod_name: mod_name,
+			mod_license: mod_license,
+			mod_url: mod_url,
+			mod_issues_url: mod_issues_url,
+			mod_authors: mod_authors,
+			mod_description: mod_description
     ]
     inputs.properties(properties)
 

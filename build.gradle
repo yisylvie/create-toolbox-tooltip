@@ -15,8 +15,6 @@ subprojects {
     }
 
     repositories {
-        maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
-
         // mavens used on both forge and fabric
         maven { url = "https://maven.blamejared.com/" } // JEI
         maven { url = "https://maven.tterrag.com/" } // Flywheel on both, Create and Registrate on forge
@@ -39,10 +37,9 @@ allprojects {
     apply plugin: "maven-publish"
 
     base {
-        archivesName = rootProject.archives_base_name
+        archivesName = rootProject.mod_id
     }
 
-    // version = rootProject.mod_version
     group = rootProject.maven_group
 
     tasks.withType(JavaCompile) {
