@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 
-import net.minecraft.resources.ResourceLocation;
-
 @Mod(createToolboxTooltip.ID)
 public final class createToolboxTooltip {
     public static final String ID = "createtoolboxtooltip";
