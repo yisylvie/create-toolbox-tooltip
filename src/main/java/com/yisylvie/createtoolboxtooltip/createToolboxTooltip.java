@@ -16,10 +16,6 @@ public final class createToolboxTooltip {
     public static final String NAME = "Create Toolbox Tooltip";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
-    // public static ResourceLocation id(String path) {
-	// 	return ResourceLocation.fromNamespaceAndPath(ID, path);
-    // }
-
 	public createToolboxTooltip() {
 		// plugin registration
 		ModLoadingContext.get().registerExtensionPoint(ShulkerBoxTooltipPlugin.class,
