@@ -21,7 +21,8 @@ import net.minecraft.client.gui.GuiGraphics;
 @SuppressWarnings("UnstableApiUsage")
 @Mixin(VanillaPreviewRenderer.class)
 public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
-    protected VanillaPreviewRendererMixin(int slotWidth, int slotHeight, int slotXOffset, int slotYOffset) {
+    protected VanillaPreviewRendererMixin(
+			int slotWidth, int slotHeight, int slotXOffset, int slotYOffset) {
         super(slotWidth, slotHeight, slotXOffset, slotYOffset);
     }
 
@@ -39,7 +40,8 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
             int mouseX, int mouseY, CallbackInfo ci) {
         if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
 			if(this.previewType == PreviewType.COMPACT
-                    && ToolboxPreviewProvider.getItemCount(toolboxProvider.getInventory(this.previewContext)) == 0) {
+                    && ToolboxPreviewProvider.getItemCount(
+							toolboxProvider.getInventory(this.previewContext)) == 0) {
                 ci.cancel();
             }
         }
@@ -61,8 +63,10 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer{
 	)
 	private void createtoolboxtooltip$changeHeight(CallbackInfoReturnable<Integer> cir) {
 		if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
-			if (ShulkerBoxTooltip.config.preview.position == Configuration.PreviewPosition.INSIDE
-					&& ShulkerBoxTooltipApi.getCurrentPreviewType(this.provider.isFullPreviewAvailable(this.previewContext))
+			if (ShulkerBoxTooltip.config.preview.position
+					== Configuration.PreviewPosition.INSIDE
+					&& ShulkerBoxTooltipApi.getCurrentPreviewType(
+							this.provider.isFullPreviewAvailable(this.previewContext))
 					== PreviewType.COMPACT
 					&& toolboxProvider.isInventoryEmpty(this.previewContext)) {
 				cir.setReturnValue(0);

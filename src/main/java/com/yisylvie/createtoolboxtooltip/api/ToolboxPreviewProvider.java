@@ -177,7 +177,11 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
         return itemCount;
     }
 
+	/**
+	 * @return true if inventory is empty, but there are 0 stack compartments
+	 */
     public Boolean isInventoryEmpty(PreviewContext context) {
-        return getItemCount(this.getInventory(context)) == 0 && getItemCount(this.getCompartments(context)) != 0;
+        return getItemCount(this.getInventory(context)) == 0
+				&& getItemCount(this.getCompartments(context)) != 0;
     }
 }

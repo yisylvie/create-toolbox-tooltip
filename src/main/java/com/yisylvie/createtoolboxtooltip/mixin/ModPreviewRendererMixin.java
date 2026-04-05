@@ -19,7 +19,8 @@ import com.misterpemodder.shulkerboxtooltip.impl.renderer.ModPreviewRenderer;
 @SuppressWarnings("UnstableApiUsage")
 @Mixin(ModPreviewRenderer.class)
 public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
-    protected ModPreviewRendererMixin(int slotWidth, int slotHeight, int slotXOffset, int slotYOffset) {
+    protected ModPreviewRendererMixin(
+			int slotWidth, int slotHeight, int slotXOffset, int slotYOffset) {
         super(slotWidth, slotHeight, slotXOffset, slotYOffset);
     }
 
@@ -62,8 +63,10 @@ public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
 	)
 	private void createtoolboxtooltip$changeHeight(CallbackInfoReturnable<Integer> cir) {
 		if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
-			if (ShulkerBoxTooltip.config.preview.position == Configuration.PreviewPosition.INSIDE
-					&& ShulkerBoxTooltipApi.getCurrentPreviewType(this.provider.isFullPreviewAvailable(this.previewContext))
+			if (ShulkerBoxTooltip.config.preview.position
+					== Configuration.PreviewPosition.INSIDE
+					&& ShulkerBoxTooltipApi.getCurrentPreviewType(
+							this.provider.isFullPreviewAvailable(this.previewContext))
 					== PreviewType.COMPACT
 					&& toolboxProvider.isInventoryEmpty(this.previewContext)) {
 				cir.setReturnValue(0);
