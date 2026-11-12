@@ -1,6 +1,7 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
+import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,7 +40,9 @@ public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
     )
     private boolean createtoolboxtooltip$drawIfEmpty(boolean isEmpty) {
         if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
-            if(this.previewType == PreviewType.FULL) {
+			createToolboxTooltip.LOGGER.info("preview type {}", this.previewType);
+			createToolboxTooltip.LOGGER.info("items {}", this.items);
+			if(this.previewType == PreviewType.FULL) {
                 // We must (double) negate since isEmpty is negated in original if statement
                 return !toolboxProvider.shouldDisplay(this.previewContext);
             }

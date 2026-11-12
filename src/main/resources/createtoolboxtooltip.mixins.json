@@ -9,10 +9,14 @@
     "ModPreviewRendererMixin",
     "PreviewCategoryMixin",
     "ShulkerBoxTooltipClientMixin",
+    "RadialToolboxMenuMixin",
     "TooltipCategoryMixin",
     "VanillaPreviewRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "RadialToolboxMenuMixin"
+  ]
 }

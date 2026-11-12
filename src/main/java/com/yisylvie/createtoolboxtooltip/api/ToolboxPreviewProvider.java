@@ -32,19 +32,27 @@ import net.minecraft.world.level.block.Block;
  * every instance of CONTAINER with TOOLBOX_INVENTORY.
  */
 public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
-
+	private ToolboxInventory inventory;
     // Idk what a loot table does, but everywhere
     // else sets it to true so we're doing that
     public ToolboxPreviewProvider() {
         super(8, true);
     }
 
+	/**
+	 *  This is our special constructor for the radial toolbox menu
+	 */
+	public ToolboxPreviewProvider(ToolboxInventory inventory) {
+		super(8, true);
+		this.inventory = inventory;
+	}
+
     /**
      * should only display in compact mode if there are actual items in the inventory,
      * but if there are 0 stack compartments, we can still display in full preview mode
      */
     public boolean shouldDisplay(@Nonnull PreviewContext context) {
-        ToolboxInventory inv = context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
+		ToolboxInventory inv = getToolboxInventory(context);
         if (inv != null) {
             return getItemCount(this.getCompartments(context)) > 0;
         }
@@ -53,9 +61,9 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 
     /**
      * If the toolbox is stackable, the TOOLBOX_INVENTORY
-     * component doesn't exist (and thus we will not show tooltips)
+     * component doesn't exist (and thus we will not show tooltips).
      * It seems as though a toolbox loses its stackability
-     * when placed in the world
+     * when placed in the world.
      */
     public boolean showTooltipHints(@Nonnull PreviewContext context) {
         return context.stack().has(AllDataComponents.TOOLBOX_INVENTORY);
@@ -94,13 +102,12 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
      * Toolboxes are stored with 32 stacks in the Items tag,
      * since each slot in a toolbox can fit 4 ordinary sized stacks.
      * We must consolidate these 32 stacks back down into 8,
-     * so that they can be displayed properly
+     * so that they can be displayed properly.
      */
     public List<ItemStack> getInventory(@Nonnull PreviewContext context) {
         int invMaxSize = this.getInventoryMaxSize(context);
         List<ItemStack> inv = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
-        ToolboxInventory toolboxInv = context.stack()
-                .getComponents().get(AllDataComponents.TOOLBOX_INVENTORY);
+        ToolboxInventory toolboxInv = getToolboxInventory(context);
         HolderLookup.Provider registry = context.registryLookup();
         if (toolboxInv != null && registry != null) {
             CompoundTag InventoryTag = toolboxInv.serializeNBT(registry);
@@ -140,11 +147,11 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 
     /**
      * Toolboxes have a special compartments tag to store what items are in each
-     * of their 8 compartments. We must store this so that we can display any empty stacks
+     * of their 8 compartments. We must store this so that we can display any empty stacks.
      */
     public List<ItemStack> getCompartments(PreviewContext context) {
         int invMaxSize = this.getInventoryMaxSize(context);
-        ToolboxInventory toolboxInv = context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
+        ToolboxInventory toolboxInv = getToolboxInventory(context);
         List<ItemStack> comp = NonNullList.withSize(invMaxSize, ItemStack.EMPTY);
         HolderLookup.Provider registry = context.registryLookup();
 
@@ -184,4 +191,14 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
         return getItemCount(this.getInventory(context)) == 0
 				&& getItemCount(this.getCompartments(context)) != 0;
     }
+
+	/**
+	 * The ToolboxInventory is normally saved in the PreviewContext,
+	 * but with the radial toolbox menu tooltip, it is not.
+	 * @return corresponding ToolboxInventory
+	 */
+	public ToolboxInventory getToolboxInventory(PreviewContext context) {
+		return this.inventory != null ? this.inventory
+				: context.stack().get(AllDataComponents.TOOLBOX_INVENTORY);
+	}
 }
