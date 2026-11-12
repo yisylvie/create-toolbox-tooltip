@@ -1,5 +1,6 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
+import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
 import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,5 +28,19 @@ import blue.endless.jankson.Comment;
 	@Unique
 	public boolean createtoolboxtooltip$getEnableOnlyToolboxes() {
 		return createtoolboxtooltip$enableOnlyToolboxes;
+	}
+
+	/**
+	 * adds a new option to Shulker Box Tooltip's config
+	 */
+	@Unique
+	@AutoTooltip
+	@Comment("""
+		Sets the tooltip preview mode in Create's radial toolbox menu.""")
+	public PreviewType createtoolboxtooltip$radialToolboxMenuTooltip = PreviewType.FULL;
+
+	@Unique
+	public PreviewType createtoolboxtooltip$getRadialToolboxMenuTooltip() {
+		return createtoolboxtooltip$radialToolboxMenuTooltip;
 	}
 }

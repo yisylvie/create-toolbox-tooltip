@@ -8,8 +8,9 @@
     "ClientEventsMixin",
     "ModPreviewRendererMixin",
     "PreviewCategoryMixin",
-    "ShulkerBoxTooltipClientMixin",
     "RadialToolboxMenuMixin",
+    "ShulkerBoxTooltipClientMixin",
+    "ToolboxBlockEntityMixin",
     "TooltipCategoryMixin",
     "VanillaPreviewRendererMixin"
   ],
