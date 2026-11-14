@@ -40,8 +40,6 @@ public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
     )
     private boolean createtoolboxtooltip$drawIfEmpty(boolean isEmpty) {
         if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
-			createToolboxTooltip.LOGGER.info("preview type {}", this.previewType);
-			createToolboxTooltip.LOGGER.info("items {}", this.items);
 			if(this.previewType == PreviewType.FULL) {
                 // We must (double) negate since isEmpty is negated in original if statement
                 return !toolboxProvider.shouldDisplay(this.previewContext);

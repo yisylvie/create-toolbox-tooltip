@@ -15,6 +15,9 @@ import org.spongepowered.asm.mixin.Unique;
 	@Shadow
 	ToolboxInventory inventory;
 
+	/**
+	 * So we can use the package private field inventory in ToolboxBlockEntity
+	 */
 	@Unique
 	public ToolboxInventory createtoolboxtooltip$getToolboxInventory() {
 		return this.inventory;

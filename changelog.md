@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0+1.21.1] — 2026-11-14
+
+### Added
+
+- Tooltips to Create&rsquo;s radial toolbox menu.
+- New config option to configure the radial toolbox menu previews.
+- New config option to toggle inventory previews on/off.
+
 ## [1.0.4+1.21.1] — 2026-04-04
 
 ### Added

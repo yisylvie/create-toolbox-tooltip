@@ -1,5 +1,11 @@
 {
     "shulkerboxtooltip.colors.create.toolboxes": "Toolboxes",
+    "shulkerboxtooltip.config.option.toolboxes": "Toolboxes",
+    "shulkerboxtooltip.config.preview_type.full": "Full",
+    "shulkerboxtooltip.config.preview_type.compact": "Compact",
+    "shulkerboxtooltip.config.preview_type.no_preview": "None",
+    "shulkerboxtooltip.config.option.preview.createtoolboxtooltip$enable_toolbox_previews": "Enable Toolbox Previews",
+    "shulkerboxtooltip.config.option.preview.createtoolboxtooltip$enable_toolbox_previews.tooltip": "Toggles toolbox previews in the inventory.",
     "shulkerboxtooltip.config.option.preview.createtoolboxtooltip$enable_only_toolboxes": "Enable toolbox previews only",
     "shulkerboxtooltip.config.option.preview.createtoolboxtooltip$enable_only_toolboxes.tooltip": "Toggles every preview type besides toolboxes \nto prevent incompatibilities with other mods.",
     "shulkerboxtooltip.config.option.preview.createtoolboxtooltip$radial_toolbox_menu_tooltip": "Radial Toolbox Menu Tooltip",

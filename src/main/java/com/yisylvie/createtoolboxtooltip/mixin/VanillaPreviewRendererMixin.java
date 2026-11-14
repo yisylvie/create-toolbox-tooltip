@@ -1,6 +1,5 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
-import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
 import com.yisylvie.createtoolboxtooltip.access.VanillaPreviewRendererAccess;
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 
@@ -43,8 +42,8 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer im
         cancellable = true
     )
     private void createtoolboxtooltip$dontDrawIfEmpty(
-            int x, int y, GuiGraphics context, Font textRenderer,
-            int mouseX, int mouseY, CallbackInfo ci) {
+			int x, int y, GuiGraphics graphics, Font font,
+			int mouseX, int mouseY, CallbackInfo ci) {
         if (this.provider instanceof ToolboxPreviewProvider toolboxProvider) {
 			if(this.previewType == PreviewType.COMPACT
                     && ToolboxPreviewProvider.getItemCount(
@@ -81,6 +80,9 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer im
 		}
 	}
 
+	/**
+	 * So we can use the private method getColumnsWidth() in RadialToolboxMenuMixin
+	 */
 	@Unique
 	public int createtoolboxtooltip$getColumnsWidth() {
 		return this.getColumnsWidth();

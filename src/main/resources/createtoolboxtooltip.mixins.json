@@ -12,12 +12,11 @@
     "ShulkerBoxTooltipClientMixin",
     "ToolboxBlockEntityMixin",
     "TooltipCategoryMixin",
-    "VanillaPreviewRendererMixin"
+    "VanillaPreviewRendererMixin",
+    "PreviewTypeMixin",
+    "RadialToolboxMenuMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "client": [
-    "RadialToolboxMenuMixin"
-  ]
+  }
 }

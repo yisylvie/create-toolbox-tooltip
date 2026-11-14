@@ -1,15 +1,19 @@
 package com.yisylvie.createtoolboxtooltip.api;
 
+import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
+
 import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltipClient;
 import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorKey;
 import com.misterpemodder.shulkerboxtooltip.api.color.ColorRegistry;
 import com.misterpemodder.shulkerboxtooltip.api.provider.BlockEntityPreviewProvider;
 import com.misterpemodder.shulkerboxtooltip.impl.color.ColorRegistryImpl;
+import com.misterpemodder.shulkerboxtooltip.impl.config.ClientConfiguration;
 
 import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlock;
@@ -33,6 +37,7 @@ import net.minecraft.world.level.block.Block;
  */
 public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 	private ToolboxInventory inventory;
+	private boolean isRadial = false;
     // Idk what a loot table does, but everywhere
     // else sets it to true so we're doing that
     public ToolboxPreviewProvider() {
@@ -40,18 +45,26 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
     }
 
 	/**
-	 *  This is our special constructor for the radial toolbox menu
+	 *  This is our special constructor for the radial toolbox menu.
 	 */
 	public ToolboxPreviewProvider(ToolboxInventory inventory) {
 		super(8, true);
 		this.inventory = inventory;
+		this.isRadial = true;
 	}
 
     /**
      * should only display in compact mode if there are actual items in the inventory,
-     * but if there are 0 stack compartments, we can still display in full preview mode
+     * but if there are 0 stack compartments, we can still display in full preview mode.
+	 * Don't display if Enable Toolbox Previews is set to false in the config.
      */
+    @SuppressWarnings("UnstableApiUsage")
     public boolean shouldDisplay(@Nonnull PreviewContext context) {
+		ClientConfiguration config = ShulkerBoxTooltipClient.getConfig();
+		if (!((PreviewCategoryAccess)config.preview).createtoolboxtooltip$getEnableToolboxPreviews()
+				&& !isRadial)  {
+			return false;
+		}
 		ToolboxInventory inv = getToolboxInventory(context);
         if (inv != null) {
             return getItemCount(this.getCompartments(context)) > 0;

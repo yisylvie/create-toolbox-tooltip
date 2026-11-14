@@ -1,23 +1,45 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
-import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
 import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
+import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
 import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
 import com.misterpemodder.shulkerboxtooltip.impl.config.annotation.AutoTooltip;
 
 import blue.endless.jankson.Comment;
 
+/**
+ * adds new options to Shulker Box Tooltip's preview config
+ */
 @SuppressWarnings("UnstableApiUsage")
 @Mixin(Configuration.PreviewCategory.class)
  public abstract class PreviewCategoryMixin implements PreviewCategoryAccess {
 
-	/**
-	 * adds a new option to Shulker Box Tooltip's config
- 	 */
+	@Unique
+	@AutoTooltip
+	@Comment("""
+		Toggles inventory toolbox preview.""")
+	public boolean createtoolboxtooltip$enableToolboxPreviews = true;
+
+	@Unique
+	public boolean createtoolboxtooltip$getEnableToolboxPreviews() {
+		return createtoolboxtooltip$enableToolboxPreviews;
+	}
+
+	@Unique
+	@AutoTooltip
+	@Comment("""
+		Sets the tooltip preview mode in Create's radial toolbox menu.""")
+	public PreviewType createtoolboxtooltip$radialToolboxMenuTooltip = PreviewType.FULL;
+
+	@Unique
+	public PreviewType createtoolboxtooltip$getRadialToolboxMenuTooltip() {
+		return createtoolboxtooltip$radialToolboxMenuTooltip;
+	}
+
 	@Unique
 	@AutoTooltip
 	@Comment("""
@@ -28,19 +50,5 @@ import blue.endless.jankson.Comment;
 	@Unique
 	public boolean createtoolboxtooltip$getEnableOnlyToolboxes() {
 		return createtoolboxtooltip$enableOnlyToolboxes;
-	}
-
-	/**
-	 * adds a new option to Shulker Box Tooltip's config
-	 */
-	@Unique
-	@AutoTooltip
-	@Comment("""
-		Sets the tooltip preview mode in Create's radial toolbox menu.""")
-	public PreviewType createtoolboxtooltip$radialToolboxMenuTooltip = PreviewType.FULL;
-
-	@Unique
-	public PreviewType createtoolboxtooltip$getRadialToolboxMenuTooltip() {
-		return createtoolboxtooltip$radialToolboxMenuTooltip;
 	}
 }
