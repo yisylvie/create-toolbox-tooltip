@@ -1,5 +1,6 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
 import com.yisylvie.createtoolboxtooltip.access.ToolboxBlockEntityAccess;
@@ -18,10 +19,10 @@ import com.simibubi.create.content.equipment.toolbox.RadialToolboxMenu;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlockEntity;
 import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
 
-import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
-import dev.engine_room.flywheel.lib.transform.TransformStack;
+import net.minecraft.network.chat.Component;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,6 +39,9 @@ import net.minecraft.world.level.Level;
 @SuppressWarnings("UnstableApiUsage")
 @Mixin(RadialToolboxMenu.class)
 public abstract class RadialToolboxMenuMixin extends Screen {
+	@Shadow
+	private ToolboxBlockEntity selectedBox;
+
 	@Unique
 	private PreviewRenderer createtoolboxtooltip$renderer;
 
@@ -75,17 +79,17 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 				.createtoolboxtooltip$getRadialToolboxMenuTooltip();
 		if (previewType != PreviewType.NO_PREVIEW) {
             this.createtoolboxtooltip$renderer = PreviewRenderer.getDefaultRendererInstance();
-                this.createtoolboxtooltip$provider = new ToolboxPreviewProvider(
-                        ((ToolboxBlockEntityAccess)toolboxBlockEntity)
-                                .createtoolboxtooltip$getToolboxInventory());
-                Level world = Minecraft.getInstance().level;
-				createtoolboxtooltip$context = PreviewContext.builder(
-						AllBlocks.TOOLBOXES.get(toolboxBlockEntity.getColor()).asStack())
-                        .withRegistryLookup(world == null ? null : world.registryAccess())
-                        .build();
-                this.createtoolboxtooltip$renderer.setPreview(
-						createtoolboxtooltip$context, this.createtoolboxtooltip$provider);
-                this.createtoolboxtooltip$renderer.setPreviewType(previewType);
+			this.createtoolboxtooltip$provider = new ToolboxPreviewProvider(
+					((ToolboxBlockEntityAccess)toolboxBlockEntity)
+					.createtoolboxtooltip$getToolboxInventory());
+			Level world = Minecraft.getInstance().level;
+			createtoolboxtooltip$context = PreviewContext.builder(
+					AllBlocks.TOOLBOXES.get(toolboxBlockEntity.getColor()).asStack())
+					.withRegistryLookup(world == null ? null : world.registryAccess())
+					.build();
+			this.createtoolboxtooltip$renderer.setPreview(
+					createtoolboxtooltip$context, this.createtoolboxtooltip$provider);
+			this.createtoolboxtooltip$renderer.setPreviewType(previewType);
 		}
 	}
 
@@ -103,17 +107,19 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 			index = 1
 	)
 	private float createtoolboxtooltip$changeContentHint(float y) {
-		float hotbarHeight = 39;
-		float radialMenuHeight = 53;
-		float halfHeight = (float)this.height / 2.0F;
-		float tooltipHeight = (float)createtoolboxtooltip$renderer.getHeight();
-		if (createtoolboxtooltip$shouldDraw()) {
-			createToolboxTooltip.LOGGER.info("gap width {}", halfHeight - (hotbarHeight + radialMenuHeight));
-			createToolboxTooltip.LOGGER.info("tooltip width {}", tooltipHeight + 8);
-			return halfHeight - (hotbarHeight + radialMenuHeight) > tooltipHeight + 8?
-					(float)this.height - hotbarHeight - tooltipHeight - 4:
-			hotbarHeight;
-		}
+		// if (createtoolboxtooltip$shouldDraw()) {
+		// 	float hotbarHeight = 39;
+		// 	float radialMenuHeight = 53;
+		// 	float halfHeight = (float)this.height / 2.0F;
+		// 	float tooltipHeight = (float)createtoolboxtooltip$renderer.getHeight();
+		// 	float gap = 2;
+		// 	float textHeight = 8;
+		// 	createToolboxTooltip.LOGGER.info("gap width {}", halfHeight - (hotbarHeight + radialMenuHeight));
+		// 	createToolboxTooltip.LOGGER.info("tooltip width {}", tooltipHeight + textHeight);
+		// 	return halfHeight - (hotbarHeight + radialMenuHeight) > tooltipHeight + textHeight + gap * 3?
+		// 			(float)this.height - hotbarHeight - tooltipHeight - textHeight / 2.0F - gap * 2:
+		// 	hotbarHeight;
+		// }
 		return y;
 		// return createtoolboxtooltip$shouldDraw() ?
 		// 		((float)(this.height) / 2.0F - (40.0F + 26)) : y;
@@ -122,15 +128,81 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 	/**
 	 * adds a tooltip of toolbox content on the radial toolbox selection menu.
 	 */
+	// @Inject(
+	// 		method = "renderWindow",
+	// 		at = @At(
+	// 				value = "INVOKE",
+	// 				target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIZ)I"
+	// 		)
+	// )
+	// // private void createtoolboxtooltip$drawToolboxTooltip(GuiGraphics graphics,
+	// 		int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
+	// 	if (createtoolboxtooltip$shouldDraw()) {
+	// 		int width = this.createtoolboxtooltip$renderer.getWidth();
+	// 		// the vanillaRenderer's getWidth() doesn't get the true
+	// 		// width of the tooltip container but getColumnsWidth() does.
+	// 		if (createtoolboxtooltip$renderer instanceof VanillaPreviewRenderer vanillaRenderer) {
+	// 			width = ((VanillaPreviewRendererAccess) vanillaRenderer)
+	// 					.createtoolboxtooltip$getColumnsWidth();
+	// 		}
+	// 		this.createtoolboxtooltip$renderer.draw(
+	// 				Math.round((float) (-width) / 2.0F),
+	// 				-4 - 1 - createtoolboxtooltip$renderer.getHeight(),
+	// 				graphics, this.font, mouseX, mouseY);
+	// 	}
+	// }
+
+	/**
+	 * Adds a tooltip of toolbox content on the radial toolbox selection
+	 * menu  when a toolbox has been selected, and you are viewing its contents.
+	 */
 	@Inject(
 			method = "renderWindow",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIZ)I"
+					target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V",
+					ordinal = 4,
+					shift = At.Shift.AFTER
 			)
 	)
-	private void createtoolboxtooltip$drawToolboxTooltip(GuiGraphics graphics,
-			int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
+	private void createtoolboxtooltip$drawToolboxTooltipOnSelectedToolbox(GuiGraphics graphics,
+			 int mouseX, int mouseY, float partialTicks, CallbackInfo ci,
+			 @Local(name = "ms") PoseStack ms) {
+		// this is to be displayed when a toolbox is already selected
+		createToolboxTooltip.LOGGER.info("selected box {}", this.selectedBox);
+		if (this.selectedBox != null) {
+			createtoolboxtooltip$drawing(graphics, mouseX, mouseY, ms);
+		}
+	}
+
+	/**
+	 * Adds a tooltip of toolbox content on the radial toolbox selection
+	 * menu when you hover over the toolbox options in the menu.
+	 */
+	@Inject(
+			method = "renderWindow",
+			at = @At(
+					value = "INVOKE",
+					target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V",
+					ordinal = 5,
+					shift = At.Shift.AFTER
+			)
+	)
+	private void createtoolboxtooltip$drawToolboxTooltipOnHover(GuiGraphics graphics,
+			int mouseX, int mouseY, float partialTicks, CallbackInfo ci,
+			@Local(name = "ms") PoseStack ms) {
+		createToolboxTooltip.LOGGER.info("hover selected box {}", this.selectedBox);
+		if (this.selectedBox == null) {
+			createtoolboxtooltip$drawing(graphics, mouseX, mouseY, ms);
+		}
+	}
+
+	/**
+	* helper method to draw our tooltip
+	*/
+	@Unique
+	private void createtoolboxtooltip$drawing(GuiGraphics graphics,
+			int mouseX, int mouseY, PoseStack ms) {
 		if (createtoolboxtooltip$shouldDraw()) {
 			int width = this.createtoolboxtooltip$renderer.getWidth();
 			// the vanillaRenderer's getWidth() doesn't get the true
@@ -139,10 +211,16 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 				width = ((VanillaPreviewRendererAccess) vanillaRenderer)
 						.createtoolboxtooltip$getColumnsWidth();
 			}
+			ms.pushPose();
+			ms.translate((float)(this.width / 2), 0.0F, 0.0F);
+			RenderSystem.enableBlend();
+			RenderSystem.defaultBlendFunc();
 			this.createtoolboxtooltip$renderer.draw(
 					Math.round((float) (-width) / 2.0F),
-					4,
+					0,
 					graphics, this.font, mouseX, mouseY);
+			RenderSystem.disableBlend();
+			ms.popPose();
 		}
 	}
 
@@ -154,6 +232,7 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 		if (this.createtoolboxtooltip$renderer != null && this.createtoolboxtooltip$provider != null) {
 			return this.createtoolboxtooltip$provider.shouldDisplay(this.createtoolboxtooltip$context);
 		}
+		createToolboxTooltip.LOGGER.info("not drawing!");
 		return false;
 	}
 }
