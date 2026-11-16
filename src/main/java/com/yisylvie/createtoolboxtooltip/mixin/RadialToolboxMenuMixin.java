@@ -1,7 +1,5 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
 import com.yisylvie.createtoolboxtooltip.access.ToolboxBlockEntityAccess;
 import com.yisylvie.createtoolboxtooltip.access.VanillaPreviewRendererAccess;
@@ -17,19 +15,16 @@ import com.misterpemodder.shulkerboxtooltip.api.renderer.PreviewRenderer;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.toolbox.RadialToolboxMenu;
 import com.simibubi.create.content.equipment.toolbox.ToolboxBlockEntity;
-import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
-
-import net.minecraft.network.chat.Component;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -42,22 +37,16 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 	@Shadow
 	private ToolboxBlockEntity selectedBox;
 
-	@Unique
-	private PreviewRenderer createtoolboxtooltip$renderer;
-
-	@Unique
-	private ToolboxPreviewProvider createtoolboxtooltip$provider;
-
-	@Unique
-	private PreviewContext createtoolboxtooltip$context;
-
 	protected RadialToolboxMenuMixin(net.minecraft.network.chat.Component title) {
 		super(title);
 	}
 
 	/**
-	 * creates the PreviewRender, PreviewContext and PreviewProvider
-	 * for the currently hovered toolbox in the radial toolbox menu.
+	 * Draws the toolbox preview for the currently
+	 * hovered toolbox in the radial toolbox menu.
+	 * this.selectedBox is null (because we haven't selected
+	 * a box yet), so me must get our ToolboxBlockEntity from
+	 * the local variable of the currently hovered box.
 	 */
 	@Inject(
 			method = "renderWindow",
@@ -68,171 +57,77 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 	)
 	private void createtoolboxtooltip$getHoveredToolbox(GuiGraphics graphics,
 			int mouseX, int mouseY, float partialTicks, CallbackInfo ci,
-			@Local(name = "toolboxBlockEntity") ToolboxBlockEntity toolboxBlockEntity) {
-		// I couldn't figure out how to get the corresponding
-		// ItemStack from the toolboxBlockEntity, so instead we
-		// are grabbing the ToolboxInventory (which has all the
-		// info we need) from toolboxBlockEntity and passing
-		// it as a parameter to toolboxPreviewProvider.
-		ClientConfiguration config = ShulkerBoxTooltipClient.getConfig();
-		PreviewType previewType = ((PreviewCategoryAccess) config.preview)
-				.createtoolboxtooltip$getRadialToolboxMenuTooltip();
-		if (previewType != PreviewType.NO_PREVIEW) {
-            this.createtoolboxtooltip$renderer = PreviewRenderer.getDefaultRendererInstance();
-			this.createtoolboxtooltip$provider = new ToolboxPreviewProvider(
-					((ToolboxBlockEntityAccess)toolboxBlockEntity)
-					.createtoolboxtooltip$getToolboxInventory());
-			Level world = Minecraft.getInstance().level;
-			createtoolboxtooltip$context = PreviewContext.builder(
-					AllBlocks.TOOLBOXES.get(toolboxBlockEntity.getColor()).asStack())
-					.withRegistryLookup(world == null ? null : world.registryAccess())
-					.build();
-			this.createtoolboxtooltip$renderer.setPreview(
-					createtoolboxtooltip$context, this.createtoolboxtooltip$provider);
-			this.createtoolboxtooltip$renderer.setPreviewType(previewType);
-		}
+			@Local(name = "toolboxBlockEntity") ToolboxBlockEntity toolboxBlockEntity,
+			@Local(name = "ms") PoseStack ms) {
+		createtoolboxtooltip$draw(graphics, mouseX, mouseY, toolboxBlockEntity, ms, 0, -(float)this.height / 2.0F);
 	}
 
 	/**
-	 * Moves the drawing origin location up a little
-	 * to fit the tooltip on screen without overlap.
-	 */
-	@ModifyArg(
-			method = "renderWindow",
-			at = @At(
-					value = "INVOKE",
-					target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(FFF)V",
-					ordinal = 4
-			),
-			index = 1
-	)
-	private float createtoolboxtooltip$changeContentHint(float y) {
-		// if (createtoolboxtooltip$shouldDraw()) {
-		// 	float hotbarHeight = 39;
-		// 	float radialMenuHeight = 53;
-		// 	float halfHeight = (float)this.height / 2.0F;
-		// 	float tooltipHeight = (float)createtoolboxtooltip$renderer.getHeight();
-		// 	float gap = 2;
-		// 	float textHeight = 8;
-		// 	createToolboxTooltip.LOGGER.info("gap width {}", halfHeight - (hotbarHeight + radialMenuHeight));
-		// 	createToolboxTooltip.LOGGER.info("tooltip width {}", tooltipHeight + textHeight);
-		// 	return halfHeight - (hotbarHeight + radialMenuHeight) > tooltipHeight + textHeight + gap * 3?
-		// 			(float)this.height - hotbarHeight - tooltipHeight - textHeight / 2.0F - gap * 2:
-		// 	hotbarHeight;
-		// }
-		return y;
-		// return createtoolboxtooltip$shouldDraw() ?
-		// 		((float)(this.height) / 2.0F - (40.0F + 26)) : y;
-	}
-
-	/**
-	 * adds a tooltip of toolbox content on the radial toolbox selection menu.
-	 */
-	// @Inject(
-	// 		method = "renderWindow",
-	// 		at = @At(
-	// 				value = "INVOKE",
-	// 				target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIZ)I"
-	// 		)
-	// )
-	// // private void createtoolboxtooltip$drawToolboxTooltip(GuiGraphics graphics,
-	// 		int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
-	// 	if (createtoolboxtooltip$shouldDraw()) {
-	// 		int width = this.createtoolboxtooltip$renderer.getWidth();
-	// 		// the vanillaRenderer's getWidth() doesn't get the true
-	// 		// width of the tooltip container but getColumnsWidth() does.
-	// 		if (createtoolboxtooltip$renderer instanceof VanillaPreviewRenderer vanillaRenderer) {
-	// 			width = ((VanillaPreviewRendererAccess) vanillaRenderer)
-	// 					.createtoolboxtooltip$getColumnsWidth();
-	// 		}
-	// 		this.createtoolboxtooltip$renderer.draw(
-	// 				Math.round((float) (-width) / 2.0F),
-	// 				-4 - 1 - createtoolboxtooltip$renderer.getHeight(),
-	// 				graphics, this.font, mouseX, mouseY);
-	// 	}
-	// }
-
-	/**
-	 * Adds a tooltip of toolbox content on the radial toolbox selection
-	 * menu  when a toolbox has been selected, and you are viewing its contents.
+	 * Adds a persistent toolbox tooltip to the radial toolbox selection
+	 * menu while a toolbox is selected, and you are viewing its contents.
 	 */
 	@Inject(
 			method = "renderWindow",
 			at = @At(
 					value = "INVOKE",
 					target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V",
-					ordinal = 4,
-					shift = At.Shift.AFTER
+					ordinal = 4
 			)
 	)
 	private void createtoolboxtooltip$drawToolboxTooltipOnSelectedToolbox(GuiGraphics graphics,
 			 int mouseX, int mouseY, float partialTicks, CallbackInfo ci,
 			 @Local(name = "ms") PoseStack ms) {
-		// this is to be displayed when a toolbox is already selected
-		createToolboxTooltip.LOGGER.info("selected box {}", this.selectedBox);
 		if (this.selectedBox != null) {
-			createtoolboxtooltip$drawing(graphics, mouseX, mouseY, ms);
+			createtoolboxtooltip$draw(graphics, mouseX, mouseY, this.selectedBox, ms, (float)this.width / 2.0F, 0);
 		}
 	}
 
 	/**
-	 * Adds a tooltip of toolbox content on the radial toolbox selection
-	 * menu when you hover over the toolbox options in the menu.
+	 * Creates the PreviewRender, PreviewContext, and PreviewProvider
+	 * given a ToolboxBlockEntity, then draws the toolbox preview
+	 * for the corresponding toolbox.
 	 */
-	@Inject(
-			method = "renderWindow",
-			at = @At(
-					value = "INVOKE",
-					target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V",
-					ordinal = 5,
-					shift = At.Shift.AFTER
-			)
-	)
-	private void createtoolboxtooltip$drawToolboxTooltipOnHover(GuiGraphics graphics,
-			int mouseX, int mouseY, float partialTicks, CallbackInfo ci,
-			@Local(name = "ms") PoseStack ms) {
-		createToolboxTooltip.LOGGER.info("hover selected box {}", this.selectedBox);
-		if (this.selectedBox == null) {
-			createtoolboxtooltip$drawing(graphics, mouseX, mouseY, ms);
-		}
-	}
-
-	/**
-	* helper method to draw our tooltip
-	*/
 	@Unique
-	private void createtoolboxtooltip$drawing(GuiGraphics graphics,
-			int mouseX, int mouseY, PoseStack ms) {
-		if (createtoolboxtooltip$shouldDraw()) {
-			int width = this.createtoolboxtooltip$renderer.getWidth();
-			// the vanillaRenderer's getWidth() doesn't get the true
-			// width of the tooltip container but getColumnsWidth() does.
-			if (createtoolboxtooltip$renderer instanceof VanillaPreviewRenderer vanillaRenderer) {
-				width = ((VanillaPreviewRendererAccess) vanillaRenderer)
-						.createtoolboxtooltip$getColumnsWidth();
+	private void createtoolboxtooltip$draw(GuiGraphics graphics, int mouseX,
+			int mouseY, ToolboxBlockEntity toolboxBlockEntity, PoseStack ms, float x, float y) {
+		// check if "Radial Toolbox Menu Tooltip" config option is toggled on
+		ClientConfiguration config = ShulkerBoxTooltipClient.getConfig();
+		PreviewType previewType = ((PreviewCategoryAccess) config.preview)
+				.createtoolboxtooltip$getRadialToolboxMenuTooltip();
+		if (previewType != PreviewType.NO_PREVIEW && config.preview.enable) {
+			PreviewRenderer renderer = PreviewRenderer.getDefaultRendererInstance();
+			// I couldn't figure out how to get the corresponding ItemStack from the
+			// toolboxBlockEntity, so instead we are grabbing the ToolboxInventory
+			// (which has all the info we need) from toolboxBlockEntity and passing
+			// it as a parameter to toolboxPreviewProvider.
+			ToolboxPreviewProvider provider = new ToolboxPreviewProvider(
+					((ToolboxBlockEntityAccess) toolboxBlockEntity)
+					.createtoolboxtooltip$getToolboxInventory());
+			Level world = Minecraft.getInstance().level;
+			PreviewContext context = PreviewContext.builder(
+					AllBlocks.TOOLBOXES.get(toolboxBlockEntity.getColor()).asStack())
+					.withRegistryLookup(world == null ? null : world.registryAccess())
+					.build();
+			renderer.setPreview(context, provider);
+			renderer.setPreviewType(previewType);
+			// drawing the tooltip
+			if (provider.shouldDisplay(context)) {
+				float width;
+				// the vanillaRenderer's getWidth() doesn't get the true
+				// width of the tooltip container but getColumnsWidth() does.
+				if (renderer instanceof VanillaPreviewRenderer vanillaRenderer) {
+					width = ((VanillaPreviewRendererAccess) vanillaRenderer)
+							.createtoolboxtooltip$getColumnsWidth();
+				} else {
+					width = renderer.getWidth();
+				}
+				// we're injecting before the previous drawing has been popped,
+				// so we have to pop first instead of last.
+				ms.popPose();
+				ms.pushPose();
+				ms.translate(x - width / 2.0F, y, 0);
+				renderer.draw(0,0, graphics, this.font, mouseX, mouseY);
 			}
-			ms.pushPose();
-			ms.translate((float)(this.width / 2), 0.0F, 0.0F);
-			RenderSystem.enableBlend();
-			RenderSystem.defaultBlendFunc();
-			this.createtoolboxtooltip$renderer.draw(
-					Math.round((float) (-width) / 2.0F),
-					0,
-					graphics, this.font, mouseX, mouseY);
-			RenderSystem.disableBlend();
-			ms.popPose();
 		}
-	}
-
-	/**
-	 * helper method to check if we are drawing a tooltip
-	 */
-	@Unique
-	private boolean createtoolboxtooltip$shouldDraw() {
-		if (this.createtoolboxtooltip$renderer != null && this.createtoolboxtooltip$provider != null) {
-			return this.createtoolboxtooltip$provider.shouldDisplay(this.createtoolboxtooltip$context);
-		}
-		createToolboxTooltip.LOGGER.info("not drawing!");
-		return false;
 	}
 }
