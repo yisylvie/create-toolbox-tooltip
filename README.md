@@ -6,7 +6,7 @@ This addon mod shows a tooltip which displays the contents of Create toolboxes w
 
 <br>
 
-<img src="images/compact_preview.png" alt="compact preview window" width="80%"/> <img src="images/full_preview.png" alt="full preview window" width="80%"/> <img src="images/radial%20toolbox%20menu%20preview.png" alt="radial toolbox menu preview" width="80%"/>
+<img src="images/compact_preview.png" alt="compact preview window" width="80%"/> <img src="images/radial%20toolbox%20menu%20preview.png" alt="radial toolbox menu preview" width="80%"/> <img src="images/full_preview.png" alt="full preview window" width="80%"/> 
 
 This mod was made using the Shulker Box Tooltip API. You can edit its configurations under the Shulker Box Tooltip mod&rsquo;s config in Mod Menu (on Quilt/Fabric, you will need to have Mod Menu installed first). Check out their [Wiki](https://github.com/MisterPeModder/ShulkerBoxTooltip/wiki) and [Modrinth](https://modrinth.com/mod/shulkerboxtooltip) page for more info.
 
