@@ -34,7 +34,7 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer im
 
     /**
      * Vanilla theme displays even if inventory is empty, so we must override for
-     * when there are nonempty compartments and the preview type is compact
+     * when there are nonempty compartments and the preview type is compact.
      */
     @Inject(
         method = "draw",
@@ -81,7 +81,7 @@ public abstract class VanillaPreviewRendererMixin extends BasePreviewRenderer im
 	}
 
 	/**
-	 * So we can use the private method getColumnsWidth() in RadialToolboxMenuMixin
+	 * So we can use the private method getColumnsWidth() in RadialToolboxMenuMixin.
 	 */
 	@Unique
 	public int createtoolboxtooltip$getColumnsWidth() {

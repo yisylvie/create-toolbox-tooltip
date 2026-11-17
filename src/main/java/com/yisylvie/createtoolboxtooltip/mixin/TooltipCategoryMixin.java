@@ -15,7 +15,7 @@ import blue.endless.jankson.Comment;
  public abstract class TooltipCategoryMixin implements TooltipCategoryAccess {
 
 	/**
-	 * adds a new option to Shulker Box Tooltip's tooltip config
+	 * Adds a new option to Shulker Box Tooltip's tooltip config.
  	 */
 	@Unique
 	@AutoTooltip

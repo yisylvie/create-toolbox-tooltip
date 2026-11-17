@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Unique;
 	ToolboxInventory inventory;
 
 	/**
-	 * So we can use the package private field inventory in ToolboxBlockEntity
+	 * So we can use the package private field inventory in ToolboxBlockEntity.
 	 */
 	@Unique
 	public ToolboxInventory createtoolboxtooltip$getToolboxInventory() {

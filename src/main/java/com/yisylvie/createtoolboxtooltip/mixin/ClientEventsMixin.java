@@ -20,8 +20,8 @@ import net.minecraft.world.item.BlockItem;
 public abstract class ClientEventsMixin {
 
     /**
-     * disables the default Create toolbox tooltip if
-	 * the enableCreateTooltips flag is set to false
+     * Disables the default Create toolbox tooltip if
+	 * the enableCreateTooltips flag is set to false.
 	 */
 	@SuppressWarnings("UnstableApiUsage")
 	@Inject(

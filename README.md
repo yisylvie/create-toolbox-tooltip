@@ -6,7 +6,7 @@ This addon mod shows a tooltip which displays the contents of Create toolboxes w
 
 <br>
 
-<img src="images/compact_preview.png" alt="Compact Preview Window" width="80%"/> <img src="images/full_preview.png" alt="Full Preview Window" width="80%"/> <img src="images/full_preview.png" alt="Radial toolbox menu tooltip" width="80%"/>
+<img src="images/compact_preview.png" alt="compact preview window" width="80%"/> <img src="images/full_preview.png" alt="full preview window" width="80%"/> <img src="images/radial%20toolbox%20menu%20preview.png" alt="radial toolbox menu preview" width="80%"/>
 
 This mod was made using the Shulker Box Tooltip API. You can edit its configurations under the Shulker Box Tooltip mod&rsquo;s config in Mod Menu (on Quilt/Fabric, you will need to have Mod Menu installed first). Check out their [Wiki](https://github.com/MisterPeModder/ShulkerBoxTooltip/wiki) and [Modrinth](https://modrinth.com/mod/shulkerboxtooltip) page for more info.
 
@@ -14,23 +14,27 @@ Big thanks to the creators of Shulker Box Tooltip for making this mod a possibil
 
 ## Features:
 
-<img src="images/shulker box tooltip config colors.png" alt="Toolbox color configuration menu" width="80%"/>
-
-(Basically) everything that Shulker Box Tooltip gives you for Shulker Boxes except for toolboxes including GUI color customization.
-
-<img src="images/shulker box tooltip config colors.png" alt="Radial toolbox menu" width="80%"/>
+<img src="images/radial%20toolbox%20menu%20selected%20toolbox%20preview.png" alt="radial toolbox menu on a selected toolbox" width="80%"/>
 
 View tooltips on the radial toolbox menu.
 
 <br>
 
-<img src="images/empty toolbox.png" alt="Empty toolbox preview window" width="80%"/>
+<img src="images/empty toolbox.png" alt="empty toolbox preview window" width="80%"/>
 
 Displays empty item stacks.
 
 <br>
 
+<img src="images/shulker box tooltip config colors.png" alt="Toolbox Color Configuration Menu" width="80%"/>
+
+(Basically) everything that Shulker Box Tooltip gives you for Shulker Boxes except for toolboxes including GUI color customization.
+
+<br>
+
 <img src="images/shulker%20box%20tooltip%20config%20preview.png" alt="Shulker Box Tooltip config window" width="80%"/>
+
+Ability to toggle on/off tooltips and change preview display modes for the radial toolbox menu.
 
 Ability to toggle off tooltips for other container types besides toolboxes to prevent incompatibilities with other mods such as [Easy Shulker Boxes](https://modrinth.com/mod/easy-shulker-boxes).
 
@@ -39,10 +43,6 @@ Ability to toggle off tooltips for other container types besides toolboxes to pr
 <img src="images/shulker%20box%20tooltip%20config%20tooltip.png" alt="Shulker Box Tooltip config window" width="80%"/>
 
 Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
-
-<img src="images/shulker%20box%20tooltip%20config%20tooltip.png" alt="Shulker Box Tooltip config window" width="80%"/>
-
-Ability to toggle on/off tooltips and change preview display modes for the radial toolbox menu.
 
 ## Dependencies:
 
@@ -55,10 +55,14 @@ Ability to toggle on/off tooltips and change preview display modes for the radia
 
 ## Support This Project
 
-Did this mod help save you countless hours of digging through unlabelled toolboxes? Consider supporting its development! Donate to me on [PayPal](), sponsor me on [GitHub](), or use my referal link to get your own Lilypad server: []().
+Did this mod help save you countless hours of digging through unlabelled toolboxes? Consider supporting its development! Donate to me on [PayPal](https://www.paypal.me/yisylvie), sponsor me on [GitHub](https://github.com/sponsors/yisylvie), or use my [referal link](https://billing.lilypad.gg/aff.php?aff=191) to get your own Lilypad server 🥰🤗
 
-[<img src="images/shulker%20box%20tooltip%20config%20tooltip.png" alt="Get a Lilypad Server today" width="90%"/>]()
-[<img src="images/shulker%20box%20tooltip%20config%20tooltip.png" alt="Sponsor me on GitHub" width="90%"/>]()
+[<iframe src="https://github.com/sponsors/yisylvie/card" title="Sponsor yisylvie" width="49%" style="border: 0;"></iframe>](https://github.com/sponsors/yisylvie)
+[<img src="images/donate%20with%20paypal%20button.svg" alt="Dontate with PayPal" width="49%"/>](https://www.paypal.me/yisylvie)
+
+<br>
+
+[<img src="images/lilypad%20server%20banner%20ad.png" alt="Get a Lilypad server today" width="100%"/>](https://billing.lilypad.gg/aff.php?aff=191)
 
 #### License
 

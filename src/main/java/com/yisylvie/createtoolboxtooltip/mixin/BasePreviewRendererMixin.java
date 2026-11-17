@@ -5,6 +5,13 @@ import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
 import java.util.Iterator;
 import java.util.List;
 
+import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
+import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
+import com.misterpemodder.shulkerboxtooltip.api.config.PreviewConfiguration;
+import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
+import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
+import com.misterpemodder.shulkerboxtooltip.impl.util.MergedItemStack;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,13 +20,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
-import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
-import com.misterpemodder.shulkerboxtooltip.api.config.PreviewConfiguration;
-import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
-import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
-import com.misterpemodder.shulkerboxtooltip.impl.util.MergedItemStack;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -53,7 +53,7 @@ public abstract class BasePreviewRendererMixin {
 	 * and display item decorations for items with a stack size of 1.
 
 	 *  If there are two items with a (compacted) stack >= 1000,
-	 *  shifts the second stack tooltip over a tiny bit so they won't overlap
+	 *  shifts the second stack tooltip over a tiny bit so they won't overlap.
 	 */
 	@Inject(
 		method = "drawItem",
@@ -73,7 +73,7 @@ public abstract class BasePreviewRendererMixin {
 						.getInventory(this.previewContext).get(slot);
 				ItemStack compartmentStack = toolboxProvider
 						.getCompartments(this.previewContext).get(slot);
-				// the mergedItemStack does funky things, so we must regrab the (unmerged) stack
+				// the mergedItemStack does funky things, so we must regrab the (unmerged) stack.
 				if (realStack.isEmpty() && !compartmentStack.isEmpty()) {
 					context.renderItem(compartmentStack, x, y);
 					context.renderItemDecorations(
@@ -105,7 +105,7 @@ public abstract class BasePreviewRendererMixin {
 	/**
 	 * drawItems() iterates over the inventory tag,
 	 * but we need to iterate over the compartments tag instead
-	 * when rendering an empty inventory with nonempty compartments
+	 * when rendering an empty inventory with nonempty compartments.
 	 *
 	 * @param itemsIterator the original items iterator
 	 * @return our new compartment iterator
@@ -128,7 +128,7 @@ public abstract class BasePreviewRendererMixin {
 	/**
 	 * getStackAt() iterates over the inventory tag,
 	 * but we need to iterate over the compartments tag instead
-	 * so that we can show tooltips for empty stacks
+	 * so that we can show tooltips for empty stacks.
 	 *
 	 * @param itemsIterator the original iterator
 	 * @return our new compartment iterator
@@ -149,7 +149,7 @@ public abstract class BasePreviewRendererMixin {
 
 	/**
 	 * Helper method to get the compartment iterator
-	 * We first have to turn our original List<ItemStack> into a List<MergedItemStack>
+	 * We first have to turn our original List<ItemStack> into a List<MergedItemStack>.
 	 */
 	@Unique
 	private static Iterator<MergedItemStack> createtoolboxtooltip$getCompartmentIterator(

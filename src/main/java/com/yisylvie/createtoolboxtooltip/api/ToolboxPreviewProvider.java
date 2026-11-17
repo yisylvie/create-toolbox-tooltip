@@ -38,8 +38,7 @@ import net.minecraft.world.level.block.Block;
 public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 	private ToolboxInventory inventory;
 	private boolean isRadial = false;
-    // Idk what a loot table does, but everywhere
-    // else sets it to true so we're doing that
+
     public ToolboxPreviewProvider() {
         super(8, true);
     }
@@ -54,7 +53,7 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 	}
 
     /**
-     * should only display in compact mode if there are actual items in the inventory,
+     * Should only display in compact mode if there are actual items in the inventory,
      * but if there are 0 stack compartments, we can still display in full preview mode.
 	 * Don't display if Enable Toolbox Previews is set to false in the config.
      */
@@ -208,6 +207,7 @@ public class ToolboxPreviewProvider extends BlockEntityPreviewProvider {
 	/**
 	 * The ToolboxInventory is normally saved in the PreviewContext,
 	 * but with the radial toolbox menu tooltip, it is not.
+	 *
 	 * @return corresponding ToolboxInventory
 	 */
 	public ToolboxInventory getToolboxInventory(PreviewContext context) {

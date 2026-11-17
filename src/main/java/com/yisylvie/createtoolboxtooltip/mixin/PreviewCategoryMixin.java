@@ -2,17 +2,17 @@ package com.yisylvie.createtoolboxtooltip.mixin;
 
 import com.yisylvie.createtoolboxtooltip.access.PreviewCategoryAccess;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
-
 import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
 import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
 import com.misterpemodder.shulkerboxtooltip.impl.config.annotation.AutoTooltip;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+
 import blue.endless.jankson.Comment;
 
 /**
- * adds new options to Shulker Box Tooltip's preview config
+ * Adds new options to Shulker Box Tooltip's preview config.
  */
 @SuppressWarnings("UnstableApiUsage")
 @Mixin(Configuration.PreviewCategory.class)

@@ -1,14 +1,6 @@
 package com.yisylvie.createtoolboxtooltip.mixin;
 
 import com.yisylvie.createtoolboxtooltip.api.ToolboxPreviewProvider;
-import com.yisylvie.createtoolboxtooltip.createToolboxTooltip;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip;
 import com.misterpemodder.shulkerboxtooltip.api.PreviewType;
@@ -16,6 +8,13 @@ import com.misterpemodder.shulkerboxtooltip.api.ShulkerBoxTooltipApi;
 import com.misterpemodder.shulkerboxtooltip.impl.config.Configuration;
 import com.misterpemodder.shulkerboxtooltip.impl.renderer.BasePreviewRenderer;
 import com.misterpemodder.shulkerboxtooltip.impl.renderer.ModPreviewRenderer;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 @SuppressWarnings("UnstableApiUsage")
 @Mixin(ModPreviewRenderer.class)
@@ -28,7 +27,7 @@ public abstract class ModPreviewRendererMixin extends BasePreviewRenderer{
 	/**
      * Mod default theme doesn't display if inventory is empty,
      * so we must override for when there are nonempty compartments
-     * and the preview type is full
+     * and the preview type is full.
      */
     @ModifyExpressionValue(
         method = "draw",

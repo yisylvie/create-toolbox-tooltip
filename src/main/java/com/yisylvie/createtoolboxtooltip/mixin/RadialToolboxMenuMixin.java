@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.llamalad7.mixinextras.sugar.Local;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.GuiGraphics;
@@ -44,9 +45,8 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 	/**
 	 * Draws the toolbox preview for the currently
 	 * hovered toolbox in the radial toolbox menu.
-	 * this.selectedBox is null (because we haven't selected
-	 * a box yet), so me must get our ToolboxBlockEntity from
-	 * the local variable of the currently hovered box.
+	 *
+	 * @param toolboxBlockEntity the currently hovered box
 	 */
 	@Inject(
 			method = "renderWindow",
@@ -59,7 +59,8 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 			int mouseX, int mouseY, float partialTicks, CallbackInfo ci,
 			@Local(name = "toolboxBlockEntity") ToolboxBlockEntity toolboxBlockEntity,
 			@Local(name = "ms") PoseStack ms) {
-		createtoolboxtooltip$draw(graphics, mouseX, mouseY, toolboxBlockEntity, ms, 0, -(float)this.height / 2.0F);
+		createtoolboxtooltip$draw(
+				graphics, mouseX, mouseY, toolboxBlockEntity, ms, 0, -(float)this.height / 2.0F);
 	}
 
 	/**
@@ -74,22 +75,23 @@ public abstract class RadialToolboxMenuMixin extends Screen {
 					ordinal = 4
 			)
 	)
-	private void createtoolboxtooltip$drawToolboxTooltipOnSelectedToolbox(GuiGraphics graphics,
-			 int mouseX, int mouseY, float partialTicks, CallbackInfo ci,
-			 @Local(name = "ms") PoseStack ms) {
+	private void createtoolboxtooltip$drawToolboxTooltipOnSelectedToolbox(
+			GuiGraphics graphics, int mouseX, int mouseY, float partialTicks,
+			CallbackInfo ci, @Local(name = "ms") PoseStack ms) {
 		if (this.selectedBox != null) {
-			createtoolboxtooltip$draw(graphics, mouseX, mouseY, this.selectedBox, ms, (float)this.width / 2.0F, 0);
+			createtoolboxtooltip$draw(
+					graphics, mouseX, mouseY, this.selectedBox, ms, (float)this.width / 2.0F, 0);
 		}
 	}
 
 	/**
-	 * Creates the PreviewRender, PreviewContext, and PreviewProvider
-	 * given a ToolboxBlockEntity, then draws the toolbox preview
-	 * for the corresponding toolbox.
+	 * Helper method that creates the PreviewRender, PreviewContext,
+	 * and PreviewProvider given a ToolboxBlockEntity, then draws
+	 * the toolbox preview for the corresponding toolbox.
 	 */
 	@Unique
-	private void createtoolboxtooltip$draw(GuiGraphics graphics, int mouseX,
-			int mouseY, ToolboxBlockEntity toolboxBlockEntity, PoseStack ms, float x, float y) {
+	private void createtoolboxtooltip$draw(GuiGraphics graphics, int mouseX, int mouseY,
+			ToolboxBlockEntity toolboxBlockEntity, PoseStack ms, float x, float y) {
 		// check if "Radial Toolbox Menu Tooltip" config option is toggled on
 		ClientConfiguration config = ShulkerBoxTooltipClient.getConfig();
 		PreviewType previewType = ((PreviewCategoryAccess) config.preview)
