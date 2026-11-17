@@ -28,6 +28,10 @@ bin/
 
 *.DS_Store
 
+#wsl
+
+*Zone.Identifier
+
 # fabric
 
 run/
