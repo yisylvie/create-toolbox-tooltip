@@ -44,6 +44,10 @@ Ability to toggle off tooltips for other container types besides toolboxes to pr
 
 Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
 
+### Coming Soon:
+
+- Support for radial toolbox menu tooltips in Minecraft v1.20.1.
+
 ## Dependencies:
 
 - [Create](https://modrinth.com/mod/create/versions?g=1.21.1&g=1.20.1) (and all its dependencies)
@@ -57,10 +61,8 @@ Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
 
 Did this mod help save you countless hours of digging through unlabelled toolboxes? Consider supporting its development! Donate to me on [PayPal](https://www.paypal.me/yisylvie), sponsor me on [GitHub](https://github.com/sponsors/yisylvie), or use my [referal link](https://billing.lilypad.gg/aff.php?aff=191) to get your own Lilypad server 🥰🤗
 
-[<iframe src="https://github.com/sponsors/yisylvie/card" title="Sponsor yisylvie" width="49%" style="border: 0;"></iframe>](https://github.com/sponsors/yisylvie)
-[<img src="images/donate%20with%20paypal%20button.svg" alt="Dontate with PayPal" width="49%"/>](https://www.paypal.me/yisylvie)
-
-<br>
+[<img src="images/donate%20with%20github%20sponsors%20button.svg" alt="Dontate with GitHub Sponsors" width="200"/>](https://github.com/sponsors/yisylvie)
+[<img src="images/donate%20with%20paypal%20button.svg" alt="Dontate with PayPal" width="200"/>](https://www.paypal.me/yisylvie)
 
 [<img src="images/lilypad%20server%20banner%20ad.png" alt="Get a Lilypad server today" width="100%"/>](https://billing.lilypad.gg/aff.php?aff=191)
 
