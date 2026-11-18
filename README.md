@@ -71,7 +71,7 @@ Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
 <a href="https://github.com/sponsors/yisylvie"><img alt="Support me through GitHub Sponsors" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/ghsponsors-singular_vector.svg"></a>&nbsp;<a href="https://www.paypal.me/yisylvie"><img alt="Support me on PayPal" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/paypal-singular_vector.svg"></a>
 </div></center>
 
-Did this mod help save you countless hours of digging through unlabelled toolboxes? Consider supporting its development! Donate to me on [PayPal](https://www.paypal.me/yisylvie), sponsor me on [GitHub](https://github.com/sponsors/yisylvie), or use my [referal link](https://billing.lilypad.gg/aff.php?aff=191) to start your own Lilypad server 🥰🤗
+Did this mod help save you countless hours of digging through unlabelled toolboxes? Consider supporting its development! Donate to me on [PayPal](https://www.paypal.me/yisylvie), sponsor me on [GitHub](https://github.com/sponsors/yisylvie), or use my [referal link](https://billing.lilypad.gg/aff.php?aff=191) to start your own Lilypad server&nbsp;🥰🤗
 
 [<img src="images/lilypad%20server%20banner%20ad.png" alt="Get a Lilypad server today" width="100%"/>](https://billing.lilypad.gg/aff.php?aff=191)
 
