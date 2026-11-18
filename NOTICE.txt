@@ -1,5 +1,5 @@
 This repository includes the following licenced software:
-  - Donate with PayPal - Button
-    Author: Niven — https://www.figma.com/@nivenjay
-    License: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0
-    Source: https://www.figma.com/community/file/1274568402383743355/donate-with-paypal-button
+  - Devin's Badges by intergrav
+    Author: intergrav — https://devins.page/
+    License: CC0 1.0 — https://creativecommons.org/publicdomain/zero/1.0
+    Source: https://www.jsdelivr.com/package/npm/@intergrav/devins-badges

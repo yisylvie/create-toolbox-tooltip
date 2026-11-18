@@ -1,12 +1,22 @@
+<center><div align="center">
+<img src="images/iconhighres.png" width="20%">
+
 # Create Toolbox Tooltip
 
-<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions?l=fabric"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/fabric_vector.svg" alt="Available for Fabric" width="200"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions?l=forge"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/forge_vector.svg" alt="Available for Forge" width="200"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions?l=neoforge"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/neoforge_vector.svg" alt="Available for NeoForge" width="200"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions?l=quilt"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/quilt_vector.svg" alt="Available for Quilt" width="200"/></a>
+<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions?l=fabric"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/fabric_vector.svg" alt="Available for Fabric" height="67"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions?l=forge"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/forge_vector.svg" alt="Available for Forge" height="67"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions?l=neoforge"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/neoforge_vector.svg" alt="Available for NeoForge" height="67"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/versions?l=quilt"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/supported/quilt_vector.svg" alt="Available for Quilt" height="67"/></a>
+
+<a href="https://modrinth.com/mod/create-toolbox-tooltip"><img alt="Available on Modrinth" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/available/modrinth_vector.svg" height="40"></a>
+
+<a href="https://github.com/yisylvie/create-toolbox-tooltip/blob/1.21.1/changelog.md"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/documentation/changelog_vector.svg" alt="Read the Changelog" height="40"/></a>&nbsp;<a href="https://modrinth.com/mod/create-toolbox-tooltip/gallery"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/documentation/modrinth-gallery_vector.svg" alt="Check out the Modrinth Gallery" height="40"/></a>
+</div></center>
 
 This addon mod shows a tooltip which displays the contents of Create toolboxes when hovering over them in your inventory or in Create&rsquo;s radial toolbox menu.
 
 <br>
 
+<center><div align="center">
 <img src="images/compact_preview.png" alt="compact preview window" width="80%"/> <img src="images/radial%20toolbox%20menu%20preview.png" alt="radial toolbox menu preview" width="80%"/> <img src="images/full_preview.png" alt="full preview window" width="80%"/>
+</div></center>
 
 This mod was made using the Shulker Box Tooltip API. You can edit its configurations under the Shulker Box Tooltip mod&rsquo;s config in Mod Menu (on Quilt/Fabric, you will need to have Mod Menu installed first). Check out their [Wiki](https://github.com/MisterPeModder/ShulkerBoxTooltip/wiki) and [Modrinth](https://modrinth.com/mod/shulkerboxtooltip) page for more info.
 
@@ -59,7 +69,9 @@ Ability to toggle on/off Create&rsquo;s default tooltip for toolboxes.
 
 ## Support This Project
 
-[<img src="images/donate%20with%20github%20sponsors%20button.svg" alt="Dontate with GitHub Sponsors" width="200"/>](https://github.com/sponsors/yisylvie)&nbsp;[<img src="images/donate%20with%20paypal%20button.svg" alt="Dontate with PayPal" width="200"/>](https://www.paypal.me/yisylvie)
+<center><div align="center">
+<a href="https://github.com/sponsors/yisylvie"><img alt="Support me through GitHub Sponsors" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/ghsponsors-singular_vector.svg"></a>&nbsp;<a href="https://www.paypal.me/yisylvie"><img alt="Support me on PayPal" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/paypal-singular_vector.svg"></a>
+</div></center>
 
 Did this mod help save you countless hours of digging through unlabelled toolboxes? Consider supporting its development! Donate to me on [PayPal](https://www.paypal.me/yisylvie), sponsor me on [GitHub](https://github.com/sponsors/yisylvie), or use my [referal link](https://billing.lilypad.gg/aff.php?aff=191) to start your own Lilypad server 🥰🤗
 
